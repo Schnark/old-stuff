@@ -1,0 +1,24 @@
+#!/usr/bin/sed -f
+
+#SERVER localurl übertragen
+
+# Lokalisierungen
+
+s/#WEITERLEITUNG/#REDIRECT/i
+s/\[\[Image:/\[\[Datei:/gi
+s/\[\[File:/\[\[Datei:/gi
+s/\[\[Bild:/\[\[Datei:/gi
+s/{{SEITENTITEL:/{{DISPLAYTITLE:/
+s/{{SORTIERUNG:/{{DEFAULTSORT:/
+
+# Variablen
+
+s/{{SITENAME}}/Wikibooks/g
+s/{{SERVER}}{{localurl:/{{fullurl:/g
+s/{{fullurl:/{{fullurl:de.wikibooks.org\/wiki\//gi
+s/{{SUBJECTSPACE}}/{{NAMESPACE}}/g
+s/{{SUBJECTPAGENAME}}/{{PAGENAME}}/g
+
+# Namensraum-Aliase
+
+#s/\[\[WB:/\[\[Wikibooks:/g

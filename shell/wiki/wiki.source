@@ -1,0 +1,18 @@
+#!/usr/bin/sed -f
+
+# von <pre> bis </pre> oder Artikelende
+/&lt; *pre.*&gt;/,/&lt; *\/ *pre *&gt;\|<\/text>\|<\/comment>/ {
+# <! maskieren
+s/&lt;!/\&amp;lt;!/g
+# {{ maskieren
+s/{{/\&amp;#123;\&amp;#123;/g
+# <nowiki> ignorieren
+s/&lt;<<\/\?nowiki&gt;/\&lt;!--&--\&gt;/
+}
+
+# gleiches für source
+/&lt; *source.*&gt;/,/&lt; *\/ *source *&gt;\|<\/text>\|<\/comment>/ {
+s/&amp;/\&amp;amp;/g
+s/&lt;!/\&amp;lt;!/g
+s/{{/\&amp;#123;\&amp;#123;/g
+}

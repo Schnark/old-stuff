@@ -1,0 +1,40 @@
+#! /bin/sh
+nl -nrz -s'"' -ba -w8 kategorien.beschreibung | sed '
+/<title>/ {
+h
+s/^.*<title>Kategorie:\([^<]*\)<.*$/\1>/
+x
+}
+G
+s/<text xml:space="preserve" \/>/<text xml:space="preserve">/
+s/^\(.*\)\n\(.*\)/\2\1/' > kategorien.beschreibung1
+
+# rm -f kategorien.beschreibung
+
+LANG=C
+# Inhalte nicht vorhandener Kategorien werden in andere Kategorien gesteckt
+
+sort kategorien.beschreibung1 kategorien.inhalt | uniq | sed '
+s/^[^"]*"\(.*\)$/\1/
+s/<\/text>//
+0,/<title>/ {
+/<title>/ i <page>
+b
+}
+/<title>/ {
+i\
+</text>\
+</revision>\
+</page>\
+<page>
+b
+}
+$ {
+a\
+</text>\
+</revision>\
+</page>
+}' > kategorien.ausgabe
+
+# rm -f kategorien.beschreibung1
+# rm -f kategorien.inhalt

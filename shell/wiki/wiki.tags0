@@ -1,0 +1,10 @@
+#!/usr/bin/sed -f
+
+# bei < und > aufspalten
+s/&lt;/\n"\n\&lt;/g
+s/&gt;/\&gt;\n"\n/g
+
+# unnötige Aufspaltungen entfernen
+s/^\n"\n//
+s/\n"\n$//
+s/\n"\n\n"\n/\n"\n/g

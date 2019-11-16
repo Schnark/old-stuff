@@ -1,0 +1,281 @@
+<div id="wikipedia-hauptseite-test">
+Bitte folgendes CSS noch einbinden:
+<syntaxhighlight lang="css">
+#wikipedia-hauptseite-test {
+	display: none; /*kann weg*/
+}
+
+/* Allgemeine Struktur */
+.wikipedia-hauptseite-links {
+	float: left;
+	width: 50%;
+	margin: 0; /*kann weg*/
+}
+.wikipedia-hauptseite-rechts {
+	float: right;
+	width: 50%;
+	margin: 0; /*kann weg*/
+}
+.wikipedia-hauptseite-unten {
+	clear: both;
+}
+
+/* Allgemeine Struktur (schmale Fenster) */
+@media screen and (max-width: 700px) {
+	.wikipedia-hauptseite-links,
+	.wikipedia-hauptseite-rechts {
+		float: none;
+		width: auto;
+	}
+}
+
+/* Allgemeines Aussehen (alle Skins, zusätzlicher Abschnitt für Vector) */
+.wikipedia-hauptseite-kasten {
+	margin-bottom: 1em;
+}
+.wikipedia-hauptseite-links .wikipedia-hauptseite-kasten {
+	margin-right: 0.5em;
+}
+.wikipedia-hauptseite-rechts .wikipedia-hauptseite-kasten {
+	margin-left: 0.5em;
+}
+.wikipedia-hauptseite-kasten h2 {
+	background-color: #d8e8ff;
+	border: 1px solid #8898bf;
+	margin: 0;
+	padding: 0.1em 0;
+	font-size: 1em;
+	font-weight: bold;
+	text-indent: 0.8em;
+}
+.wikipedia-hauptseite-inhalt {
+	background: #fff;
+	padding: 0.3em 0.8em 0.4em;
+	border: 1px solid #8898bf;
+	border-top: 0;
+}
+.wikipedia-hauptseite-inhalt hr {
+	background: #a7d7f9;
+	color: #a7d7f9;
+	height: 1px;
+	margin: 0.5em 0;
+}
+.wikipedia-hauptseite-fusszeile {
+	margin-top: 0.8em;
+	clear: both;
+	font-size: 95%;
+	text-align: right;
+}
+
+/* Allgemeines Aussehen (Vector-Skin) */
+.skin-vector .wikipedia-hauptseite-kasten {
+	padding: 5px;
+	padding-bottom: 0;
+	border: 1px solid #a7d7f9;
+	border-radius: 5px;
+}
+.skin-vector .wikipedia-hauptseite-kasten h2 {
+	background: -moz-linear-gradient(to right, #d8e8ff, #fff);
+	border: none;
+	border-radius: 2px;
+}
+.skin-vector .wikipedia-hauptseite-inhalt {
+	border: 0;
+}
+.skin-vector .wikipedia-hauptseite-inhalt hr {
+	background: #8898bf;
+	color: #8898bf;
+}
+.skin-vector .wikipedia-hauptseite-fusszeile {
+	border-top: 1px solid #ccc;
+}
+
+/* Einzelne Bereiche */
+/*Selektor*/ #catlinks,
+/*Selektor*/.action-view h1.firstHeading,
+/*Selektor*/.action-view #contentSub {
+	display: none;
+}
+.wikipedia-hauptseite-oben h2,
+.wikipedia-hauptseite-unten h2 {
+	text-align: center;
+}
+#wikipedia-hauptseite-portale,
+#wikipedia-hauptseite-themen,
+#wikipedia-hauptseite-schwesterprojekte-links {
+	text-align: center;
+	font-weight: bold;
+}
+#wikipedia-hauptseite-intern {
+	text-align: center;
+	font-size: 90%;
+}
+#wikipedia-hauptseite-portale span,
+#wikipedia-hauptseite-schwesterprojekte-links span {
+	margin-right: 1em;
+	white-space: nowrap;
+}
+
+/* Symbole */
+#wikipedia-hauptseite-portale a {
+	/*background-image: url(sprite.png);*/
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 26px;
+	padding-left: 32px;
+	padding-top: 2px;
+}
+/*
+#wikipedia-hauptseite-portal-technik a {
+	background-position: 0 -72px;
+}
+*/
+#wikipedia-hauptseite-portal-geographie a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/9/93/P_countries-lightblue.png/30px-P_countries-lightblue.png);
+}
+#wikipedia-hauptseite-portal-geschichte a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/5/53/P_history-lightblue.png/30px-P_history-lightblue.png);
+}
+#wikipedia-hauptseite-portal-gesellschaft a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/3/32/P_social_sciences-lightblue.png/30px-P_social_sciences-lightblue.png);
+}
+#wikipedia-hauptseite-portal-kunst a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/c/cd/P_art-lightblue.png/30px-P_art-lightblue.png);
+}
+#wikipedia-hauptseite-portal-religion a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/c/c2/P_religion-lightblue.png/30px-P_religion-lightblue.png);
+}
+#wikipedia-hauptseite-portal-sport a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/9/95/P_sport-lightblue.png/30px-P_sport-lightblue.png);
+}
+#wikipedia-hauptseite-portal-technik a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/d/d6/P_transport-lightblue.png/30px-P_transport-lightblue.png);
+}
+#wikipedia-hauptseite-portal-wissenschaft a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/3/33/P_ps-lightblue.png/30px-P_ps-lightblue.png);
+}
+#wikipedia-hauptseite-schwesterprojekte-links a {
+	/*background-image: url(sprite.png) !important;*/
+	background-position: 0 0 !important;
+	background-repeat: no-repeat !important;
+	display: inline-block;
+	height: 24px;
+	padding-left: 28px;
+	padding-right: 0px !important;
+}
+/*
+#wikipedia-hauptseite-schwesterprojekt-commons a {
+	background-position: 0 -72px !important;
+}
+*/
+#wikipedia-hauptseite-schwesterprojekt-meta a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/7/75/Wikimedia_Community_Logo.svg/20px-Wikimedia_Community_Logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-commons a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/18px-Commons-logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wiktionary a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Wiktionary_small.svg/20px-Wiktionary_small.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wikibooks a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikibooks-logo.svg/21px-Wikibooks-logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wikiquote a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikiquote-logo.svg/20px-Wikiquote-logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wikiversity a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/9/91/Wikiversity-logo.svg/20px-Wikiversity-logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wikisource a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Wikisource-logo.svg/20px-Wikisource-logo.svg.png) !important;
+}
+#wikipedia-hauptseite-schwesterprojekt-wikinews a {
+	background-image: url(//upload.wikimedia.org/wikipedia/commons/thumb/2/24/Wikinews-logo.svg/26px-Wikinews-logo.svg.png) !important;
+}
+</syntaxhighlight>
+</div>
+<div id="wikipedia-hauptseite">
+<div id="wikipedia-hauptseite-willkommen" class="wikipedia-hauptseite-kasten wikipedia-hauptseite-oben">
+== Willkommen bei Wikipedia ==
+<div class="wikipedia-hauptseite-inhalt">
+[[Wikipedia]] ist ein Projekt zum Aufbau einer Enzyklopädie aus [[Freie Inhalte|freien Inhalten]] in über 280&nbsp;Sprachen, zu dem [[Hilfe:Neu bei Wikipedia|du mit deinem Wissen beitragen kannst]]. Seit Mai 2001 sind so {{ARTIKELANZAHL}}&nbsp;Artikel in deutscher Sprache entstanden.
+<div id="wikipedia-hauptseite-portale">
+<span id="wikipedia-hauptseite-portal-geographie">[[Portal:Geographie|Geographie]]</span>
+<span id="wikipedia-hauptseite-portal-geschichte">[[Portal:Geschichte|Geschichte]]</span>
+<span id="wikipedia-hauptseite-portal-gesellschaft">[[Portal:Gesellschaft|Gesellschaft]]</span>
+<span id="wikipedia-hauptseite-portal-kunst">[[Portal:Kunst und Kultur|Kunst und Kultur]]</span>
+<span id="wikipedia-hauptseite-portal-religion">[[Portal:Religion|Religion]]</span>
+<span id="wikipedia-hauptseite-portal-sport">[[Portal:Sport|Sport]]</span>
+<span id="wikipedia-hauptseite-portal-technik">[[Portal:Technik|Technik]]</span>
+<span id="wikipedia-hauptseite-portal-wissenschaft">[[Portal:Wissenschaft|Wissenschaft]]</span>
+</div>
+<div id="wikipedia-hauptseite-themen">
+[[Portal:Wikipedia nach Themen|Artikel nach Themen]]&nbsp;· [[Spezial:Alle Seiten|Alphabetischer Index]]&nbsp;· [[:Kategorie:!Hauptkategorie|Artikel nach Kategorien]]&nbsp;· [[Portal:Gesprochene Wikipedia|Gesprochene Wikipedia]]
+</div>
+<div id="wikipedia-hauptseite-intern">
+[[Wikipedia:Kontakt|Kontakt]]&nbsp;·
+[[Wikipedia:Presse|Presse]]&nbsp;·
+[[Wikipedia:Statistik|Statistik]]&nbsp;·
+[[Wikipedia:Sprachen|Sprachen]]&nbsp;·
+[[Hilfe:Neu bei Wikipedia|Neu bei Wikipedia]]&nbsp;·
+[[Wikipedia:Mentorenprogramm]]
+</div>
+</div>
+</div>
+<div class="wikipedia-hauptseite-links">
+<!--{{Wikipedia:Hauptseite/Wikipedia aktuell}}-->
+<div id="wikipedia-hauptseite-artikel" class="wikipedia-hauptseite-kasten">
+== Artikel des Tages ==
+<div id="mf-tfa" class="wikipedia-hauptseite-inhalt" title="Artikel des Tages">
+{{Wikipedia:Hauptseite/Artikel des Tages/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+{{Wikipedia:Hauptseite/Artikel des Tages/Links}}
+</div></div></div>
+<div id="wikipedia-hauptseite-ereingnisse" class="wikipedia-hauptseite-kasten">
+== Was geschah am {{LOCALDAY}}. {{LOCALMONTHNAME}}? ==
+<div class="wikipedia-hauptseite-inhalt">
+{{Wikipedia:Hauptseite/Jahrestage/{{LOCALMONTHNAME}}/{{LOCALDAY}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALDAY}}. {{LOCALMONTHNAME}}|Weitere Ereignisse]]
+</div></div></div>
+</div>
+<div class="wikipedia-hauptseite-rechts">
+<div id="wikipedia-hauptseite-nachrichten" class="wikipedia-hauptseite-kasten">
+== In den Nachrichten ==
+<div id="mf-itn" class="wikipedia-hauptseite-inhalt" title="In den Nachrichten">
+{{Wikipedia:Hauptseite/Aktuelles}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALMONTHNAME}} {{LOCALYEAR}}|Weitere aktuelle Ereignisse]]&nbsp;· [[n:Hauptseite|Wikinews]]
+</div></div></div>
+<div id="wikipedia-hauptseite-verstorbene" class="wikipedia-hauptseite-kasten">
+== Kürzlich Verstorbene ==
+<div id="mf-nec" class="wikipedia-hauptseite-inhalt" title="Kürzlich Verstorbene">
+{{Hauptseite Verstorbene}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[Nekrolog {{LOCALYEAR}}|Weitere kürzlich Verstorbene]]
+</div></div></div>
+<div id="wikipedia-hauptseite-wissenswertes" class="wikipedia-hauptseite-kasten">
+== Schon gewusst? ==
+<div id="mf-dyk" class="wikipedia-hauptseite-inhalt" title="Schon gewusst?">
+{{Wikipedia:Hauptseite/Schon gewusst/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[Spezial:Neue Seiten|Weitere neue Artikel]]&nbsp;· [[Wikipedia:Hauptseite/Schon gewusst/Archiv|Frühere Schon-gewusst-Artikel]]
+</div></div></div>
+</div>
+<div id="wikipedia-hauptseite-schwesterprojekte" class="wikipedia-hauptseite-kasten wikipedia-hauptseite-unten">
+== Schwesterprojekte ==
+<div id="wikipedia-hauptseite-schwesterprojekte-links" class="wikipedia-hauptseite-inhalt">
+<span id="wikipedia-hauptseite-schwesterprojekt-meta">[{{fullurl:m:Hauptseite|uselang={{INT:Lang}}}} Meat-Wiki] – Koordination</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-commons">[{{fullurl:commons:Hauptseite|uselang={{INT:Lang}}}} Commons] – Medien</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-wiktionary">[[wikt:Wiktionary:Hauptseite|Wiktionary]] – Wörterbuch</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-wikibooks">[[b:Hauptseite|Wikibooks]] – Lehrbücher</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-wikiquote">[[q:Hauptseite|Wikiquote]] – Zitate</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-wikisource">[[s:Hauptseite|Wikisource]] – Quellen</span>
+<span id="wikipedia-hauptseite-schwesterprojekt-wikinews">[[n:Hauptseite|Wikinews]] – Nachrichten</span>
+</div>
+</div>
+</div>
+<!--[[Kategorie:Wikipedia:Hauptseite| ]]
+{{Wikipedia:Hauptseite/Interwikis}}-->
+__NOEDITSECTION____NOTOC__

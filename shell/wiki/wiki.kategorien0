@@ -1,0 +1,56 @@
+#!/usr/bin/sed -nf
+p
+
+# Kategorieninhalt speichern, verfluchte leere Kategoriebeschreibungsseiten!!!
+/<title>Kategorie:/,/<\/text>\|<text xml:space="preserve" \/>/ w kategorien.beschreibung
+
+# Titel speichern
+/<title>/ {
+s/^.*<title>\([^<]*\)<\/title>.*$/\1/
+h
+b
+}
+
+# nichts zwischen includeonly und in Kommentaren
+/&lt;includeonly&gt;/,/&lt;\/includeonly&gt;\|<\/text>/ b
+/&lt;!--.*--&gt;/ b
+/&lt;!--/,/--&gt;\|<\/text>/ b
+/<comment>/ b
+
+# Sortierung speichern
+/{{DEFAULTSORT:/ {
+s/^[^{]*{{DEFAULTSORT:\([^}]*\)}.*$/\1/
+H
+x
+s/^\(.*\)\n\(.*\)$/\2\n\1/
+x
+}
+
+# Kategorie speichern
+/\[\[Kategorie:/ {
+s/^.*\[\[Kategorie:\([^]]*\)\].*$/\1/
+# Unterstriche zu Leerzeichen, %-Darstellung bei wichtigen Zeichen korrigieren
+y/_/ /
+s/%c3%84/Ä/gi
+s/%c3%96/Ö/gi
+s/%c3%9c/Ü/gi
+s/%c3%9f/ß/gi
+s/%c3%a4/ä/gi
+s/%c3%b6/ö/gi
+s/%c3%bc/ü/gi
+y/|/\n/
+G
+# Inhalt Patternspace: Kat.\nSort.\nSort.\nTitel oder Kat.\nSort.\nTitel oder Kat.\nTitel
+s/^\(.*\n.*\)\n.*\(\n.*\)$/\1\2/
+s/^[^\n]*\n\([^\n]*\)$/&\n\1/
+t x
+: x
+y/\n/>/
+# Inhalt Patternspace: Kat.>Sort.>Titel
+s/^\(.*\)\(>.*>\)\(Kategorie:.*\)$/\1>k\2:\3/
+t weiter
+s/^\(.*\)\(>.*>.*\)$/\1>t\2/
+:weiter
+s/^\(.*>.>.*\)>\(.*\)$/\1"* [[\2]]/
+w kategorien.inhalt
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/sed -f
+
+# TODO implizites nowiki in source etc. wird nicht beachtet
+
+# von <nowiki> bis </nowiki> oder Artikelende
+/&lt;nowiki&gt;/,/&lt;\/nowiki&gt;\|<\/text>\|<\/comment>/ {
+# jedes potentiell "gefährliche" Zeichen mit << ukenntlich machen
+s/{/{<</g
+s/\[/\[<</g
+s/&lt;/\&lt;<</g
+# s/__/__<</g
+s/#\(weiterleitung\)/#<<\1/gi
+}

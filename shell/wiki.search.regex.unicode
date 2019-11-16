@@ -1,0 +1,27 @@
+#!/bin/sh
+#wiki.search.regex.unicode datenbank.xml.bz2 'reg. Ex.'|less
+#
+#durchsucht die komprimierte Datenbank nach einem regulaerem Ausdruck
+#verwendet wird Perl, Unicode-Zeichen sind mit \x{1234} möglich
+#durchsucht werden Text, aber auch Bearbeitungskommentar, Benutzername,
+#Zeitstempel und alle weiteren Metadaten (s. bzless datenbank.xml.bz2),
+#nicht jedoch die Titel (d. h. auch Titel werden durchsucht, aber nicht
+#ausgegeben)
+#
+bzcat $1 | perl -CIOE -ne 'if ($_ =~ /'$2'|<title>.*<\/title>/) {print;}' | sed -n '
+/<title>/ {
+h
+b
+}
+x
+p
+x
+s/ *<text xml:space="preserve">//
+s/<\/text>//
+s/&lt;/</g
+s/&gt;/>/g
+s/&quot;/"/g
+s/&amp;/\&/g
+p
+s/^.*$//
+p'

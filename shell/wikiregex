@@ -1,0 +1,14 @@
+#!/bin/sh
+#wikiregex datenbank.xml.bz2 'reg. Ex.'|less
+#
+#durchsucht die komprimierte Datenbank nach einem regulaerem Ausdruck
+#durchsucht werden Text, aber auch Bearbeitungskommentar, Benutzername,
+#Zeitstempel und alle weiteren Metadaten (s. bzless datenbank.xml.bz2),
+#nicht jedoch die Titel (d. h. auch Titel werden durchsucht, aber nicht
+#ausgegeben)
+#
+#zunaechst werden mit bzgrep alle Titel und passenden Textstellen gesucht
+#anschliessend streicht gawk alle Titel ausser denen zu Textstellen raus
+#schliesslich entfernt sed einige uebriggebliebenen XML-Ausdruecke
+#und wandelt per & kodierte Entitaeten in lesbare Form um
+bzgrep -e "($2)|(<title>.*</title>)" $1 | gawk '{if (match($0,"<title>")) {t=$0} else {print t,"\n",$0,"\n"}}' | sed -e 's/<text\ xml:space="preserve">//g' | sed -e 's/<\/text>//g' | sed -e 's/&lt;/</g' | sed -e 's/&gt;/>/g' | sed -e 's/&quot;/"/g' | sed -e 's/&amp;/\&/g'

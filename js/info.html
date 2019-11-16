@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installierte Apps</title>
+</head><body>
+Installierte Apps:
+<pre id="apps">
+</pre>
+<script>
+function onResult (results) {
+	var data = '', i;
+	for (i = 0; i < results.length; i++) {
+		data += JSON.stringify(results[i].manifest) + '\n';
+		//manifestURL, checkForUpdate()
+	}
+	document.getElementById('apps').textContent = data;
+}
+
+function onError () {
+	alert('Fehler');
+}
+
+function init () {
+	var request;
+	if (!navigator.mozApps || !navigator.mozApps.getInstalled) {
+		onError();
+	} else {
+		request = navigator.mozApps.getInstalled();
+		request.onerror = onError;
+		request.onsuccess = function () {
+			onResult(this.result);
+		};
+	}
+}
+
+init();
+</script>
+</body></html>
+<!--
+request = navigator.mozApps.checkInstalled('url');
+request.onsuccess = function () {
+if (request.result) request.result.checkForUpdate()
+
+
+
+
+In the Open Web apps JavaScript API, an App object is a JavaScript object that represents an app that is or could be installed in the user's app repository.
+Properties
+Name 	Description 	Type
+manifest 	The currently stored instance of the manifest of the app. 	object
+manifestURL 	Where the manifest was found. 	string
+origin 	The origin of the app (protocol, host, and optional port number). For example: http://example.com 	string
+installOrigin 	The origin of the site that triggered the installation of the app. 	string
+installTime 	The time that the app was installed. This is generated using Date().getTime(), represented as the number of milliseconds since midnight of January 1st, 1970. 	integer
+receipts 	An object containing an array of one or more receipts. Each receipt is a string. If there are no receipts, this is null. 	object or null
+state 	The enabled state of the current application. 	enabled or disabled
+Methods
+Method 	Description
+addReceipt() 	Adds a receipt to the app after an in-app purchase has been made.
+launch() 	Launches the application. Does not return any value.
+checkForUpdate() 	
+
+Check to see if the app has been updated. Returns a DOMRequest object.
+
+For packaged apps: check for updates and mark it as downloadavailable if needed.
+
+For hosted apps: check for updates on app manifest and application cache and update it if needed.
+removeReceipt() 	Removes a receipt from the app after an in-app purchase has been cancelled.
+replaceReceipt() 	Replaces one receipt with another.
+
+
+
+var request = window.navigator.mozApps.getInstalled();
+request.onerror = function(e) {
+  alert("Error calling getInstalled: " + request.error.name);
+};
+request.onsuccess = function(e) {
+  alert("Success, number of apps: " + request.result.length);
+  var appsRecord = request.result;
+};
+
+-->

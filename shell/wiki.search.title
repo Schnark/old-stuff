@@ -1,0 +1,11 @@
+#!/bin/sh
+#wiki.search.title datenbank.xml.bz2 'reg. Ex.'|less
+#
+#durchsucht alle Titel nach einem regulären Ausdruck,
+#dieser darf auch ^ und $ enthalten
+#
+suche=`echo "$2" | sed '
+s/^.*$/<title>.*&.*<\/title>/
+s/\.\*\^//
+s/\$\.\*//'`
+bzgrep -e $suche $1 | sed 's/ *<.\?title>//g'

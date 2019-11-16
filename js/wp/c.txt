@@ -1,0 +1,82 @@
+gcCf = '\u0600-\u0603\u06DD\u070F\u17B4\u17B5\u200B\u200F\u202A-\u202E\u2060-\u2064\u206A-\u206F\uFEFF\uFFF9-\uFFFB', //gc = Cf ohne U+200E (LRM), U+00AD (SHY), U+200D (ZWJ), U+200C (ZWNJ) und ohne Zeichen außerhalb Plane 0
+//gcCn TODO
+gcCc = '\u0000-\u0008\u000B\u000C-\u001F\u007F-\u009F', //gc = Cc ohne U+0009 (TAB), U+000A (LF)
+gcPd = '\u058A\u05BE\u1400\u1806\u2010-\u2012\u2015\u2E17\u2E1A\u301C\u3030\u30A0\uFE31\uFE32\uFE58\uFE63\uFF0D\u2043\u2500', //gc = Pd ohne U+002D (HYPHEN-MINUS), U+2013 (EN), U+2014 (EM), dazu U+2043 (HYPHEN BULLET), U+2500 (BOX DRAWINGS LIGHT HORIZONTAL)
+gcZ = '\u1680\u180E\u2000-\u2008\u200A\u2028\u2029\u202F\u205F\u3000', //gc = Z ohne U+0020 (SPACE), U+00A0 (NBSP), U+2009 (THIN SPACE)
+gcM  = '\u0300-\u034E\u0350-\u036F\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F', //gc = M ohne U+034F (CGJ), unvollständig, zusätzlich einige nicht zugewiesene Zeichen in entsprechenden Blöcken
+gcCo = '\uE000-\uF8FF', //gc = Co ohne Zeichen außerhalb Plane 0
+gcSkLm = '\u0060\u005E\u00A8\u00AF\u00B4\u00B8\u02B0-\u02FF', //gc = Sk und gc = Lm, unvollständig, ^ _nicht_ an erster Stelle!
+gcCs = '\uD800-\uDFFF',
+scLatin = '\u0041-\u005A\u0061-\u007A\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F\u1E00-\u1EFF\u2132\u214E\u2C60-\u2C7F\uA722-\uA7FF', //sc = Latin ohne \u00AA\u00BA (ªº), \u0250-\u02B8\u02E0-\u02E4\u1D00-\u1D25\u1D2C-\u1D5C\u1D62-\u1D65\u1D6B-\u1D77\u1D79-\u1DBE\u2071\u207F\u2090-\u209C (Lautschrift), \u2160-\u2188 (römsiche Zahlen) \u212A-\u212B\uFB00-\uFB06\uFF21-\uFF3A\uFF41-\uFF5A (Kompatibilitätszeichen), inklusive Lücken im Block Lateinisch-D
+scGreek = '\u0386-\u03A8\u03AA-\u03BB\u03BD-\u03CE\u1F00-\u1FFF', //sc = Greek (ungefähr), ohne my, Omega
+scCyrillic = '\u0400-\u052F\u2DE0-\u2DFF\uA640-\uA69F', //sc = Cyrillic (ungefähr)
+scAsian = '\u2E80-\uA4CF', //asiatische Schriften in Plane 0 (ungefähr)
+scRTL = '\u0590-\u08FF', //rechts-nach-links-Schriften in Plane 0 (ungefähr)
+scLigatur = '\u0600-\u07FF\u0900-\u109F', //Schriften, die ZWJ/ZWNJ verwenden (ungefähr)
+scOther = '\u03D0-\u03FF\u0530-\u1CFF\u2C00-\u2C5F\u2C80-\u2DDF\uA4D0-\uA63F\uA6A0-\uA6FF\uA800-\uABFF', //Schriften außer scLatin, scGreek, scCyrillic, scAsian (ungefähr)
+compat = '\uF900-\uFEFC\uFF61-\uFFEE', //Kompatibilitätszeichen (inklusive halbbreiten Zeichen)
+unerwuenscht = '\u2155-\u218F\u2625-\u2629\u2670\u2671\u2716\u2719-\u271F\u2753-\u2763\u2768-\u2775\u2794-\u27BF\uFFFC\uFFFD, //Brüche, Römische Zahlen, Dingbats, Ersatzzeichen
+eawF = '\uFF01-\uFF60\uFFE0-\uFFE6', //eaw = F ohne U+3000 (IDEOGRAHIC SPACE)
+charEN = '\u2013',
+charEM = '\u2014',
+charMINUS = '\u2212',
+charNBSP = '\u00A0',
+charTHINSPACE = '\u2009',
+charLRM = '\u200E',
+charSHY = '\u00AD',
+charZWJ = '\u200D',
+charZWNJ = '\u200C',
+charCGJ = '\u034F',
+charMy = '\u03BC',
+charOmega = '\u03A9',
+
+reControl = '.?[' + gcCf + gcCc + charCGJ + (mw.config.get('wgNamespaceNumber') === 0 ? charSHY : '') + '].?', //im Quelltext .?[gcCf gcCc charCGJ charSHY charLRM].?
+reLRM = '(?:^|[^' + scRTL + '])' + charLRM + '(?:[^' + scRTL + ']|$)', (nicht in SNR)
+reZWJZWNJ = '(?:^|[^' + scLigatur + '])[' + charZWJ + charZWNJ+ '](?:[^' + scLigatur + ']|$)',
+
+reDash = '[' + gcPd + ']',
+reEM1 = '\S\s*' + charEM, nur ANR //Lint: charEM, (außer lang=en, Tabellen)
+reEM2 = charEM + '\s*\S', nur ANR //Lint: Striche
+
+reSpace = '.?[' + gcZ + '].?', //im Quelltext .?[gcZ charNBSP charTHINSPACE].?
+
+//reUnassigned = '[' + gcCn + ']', TODO
+rePrivat = '[' + gcCo + ']',
+reNotPlane0 = '[' + gcCs + ']+',
+reNoNoNo = '[' + gcSkLm + compat + unerwuenscht + ']',
+reFullwidth = '[^' + scAsian + '][' + eawF + '][^' + scAsian + ']',
+
+reLatin1 = '[' + scLatin + '][' + scGreek + charMy + scCyrillic + scOther + ']', //Lint: nicht für IPA
+reLatin2 = '[' + scGreek + charOmega + scCyrillic + scOther + '][' + scLatin + ']', //Lint: nicht für IPA
+reGreekCyrillic = '[' + scGreek + '][' + scCyrillic + ']|[' + scCyrillic + '][' + scGreek + ']',
+
+reSteuerzeichen = new RegExp('()(' + reControl + (mw.config.get('wgNamespaceNumber') !== -1 ? '|' + reLRM : '') + '|' + reZWJZWNJ + ')', 'g'),
+reStriche = new RegExp('()(' + reDash + (mw.config.get('wgNamespaceNumber') === 0 ? '|' + reEM1 + '|' + reEM2 : '') + ')', 'g'),
+reLeerzeichen = new RegExp('()(' + reSpace + ')', 'g'),
+reUnerwuescht = new RegExp('()(' + rePrivat + '|' + reNotPlane0 + '|' + reNoNoNo + '|' + reFullwidth + ')', 'g'),
+reLateinisch = new RegExp('()(' + reLatin1 + '|' + reLatin2 + ')', 'g'),
+reGriechischKyrillisch = new RegExp('()(' + reGreekCyrillic + ')', 'g'),
+reBennenen = new RegExp('()([' + charTHINSPACE + charEN + charMINUS + (mw.config.get('wgNamespaceNumber') === 0 ? charNBSP : '') + ']' + (mw.config.get('wgNamespaceNumber') !== 0 ? '|.?' + charSHY + '.?' : '') + ')', 'g'),
+reVielleichtBenennen = new RegExp('()(.?[' + gcM + ']+|(?:^|[' + scRTL + '])' + charLRM + '.?|.?' + charLRM + '(?:[' + scRTL + '|$)|(?:^|[' + scLigatur + '])[' + charZWJ + charZWNJ + '].?|.?[' + charZWJ + charZWNJ + '](?:[' + scLigatur + '|$))', 'g');
+
+
+
+
+
+//Striche
+nur in <sup>: - und EN verboten, Rest ohne <sup>
+'\s-[\s\d]'
+'[^0-9-]\d{4}-\d{4}[^0-9-]'
+'\S' + charEN + '\s'
+'\s' + charEN + '\S'
+'\d\s+' + charEN + '\s+\d'
+'\S' + charMINUS
+'\s' + charMINUS + '\s*\d'
+
+Typographie
+", '
+...
+[..,!?;:)\]“][scLatin]
+\s[..,!?;:/] (nicht in lang=fr)
+[(\[„/]\s
+

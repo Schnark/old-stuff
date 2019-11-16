@@ -1,0 +1,6 @@
+#!/usr/bin/sed -f
+
+s/{{\//{{{{NAMESPACE}}:{{PAGENAME}}\//g
+s/\(\[\[Datei:[^]]\+|[123][0-9]px[^]]*\]\]\)/\&amp;#x5B;*\&amp;#x5D;\&lt;!--\1--\&gt;/g
+s/&lt;onlyinclude&gt;/\&lt;onlyinclude\&gt;\&lt;!-- --\&gt;/
+s/{{PLURAL:/{{#ifexpr: 1 = /gi

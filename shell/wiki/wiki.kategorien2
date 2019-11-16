@@ -1,0 +1,6 @@
+#!/usr/bin/sed -nf
+/<\/siteinfo>/ r kategorien.ausgabe
+/<page>/ b
+/<title>Kategorie:/,/<\/page>/ b
+/<title>/ i <page>
+p

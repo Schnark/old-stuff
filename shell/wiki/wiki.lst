@@ -1,0 +1,19 @@
+#!/usr/bin/sed -f
+
+# senkrechte Striche escapen
+/&lt;section *begin=/,/&lt;section *end\|<\/text>\|<\/comment>/ {
+/"/ b
+s/|/"/g
+s/{{\([^"}]*\)"\([^"}]*\)/{{\1|\2/g
+s/{{\([^"}]*\)"\([^"}]*\)"\([^"}]*\)/{{\1|\2|\3/g
+s/{{\([^"}]*\)"\([^"}]*\)"\([^"}]*\)"\([^"}]*\)/{{\1|\2|\3|\4/g
+s/"/{{!}}/g
+}
+# Anfang durch ein #ifeq ersetzen, nur wenn der übergebene Parameter (default: text, egal ob groß oder klein) stimmt oder die Seite direkt betrachtet wird anzeigen
+s/&lt;section *begin=\(&quot;\)\?\([^ &]*\)\(&quot;\)\? *\/ *&gt;/\&lt;includeonly\&gt;{{#ifeq:{{{1|text}}}|\2|\&lt;\/includeonly\&gt;/g
+s/{{#ifeq:{{{1|text}}}|Text|/{{#ifeq:{{{1|Text}}}|Text|/
+s/&lt;section *begin *\/ *&gt;//g
+# Ende schließen
+s/&lt;section *end[^\/]*\/ *&gt;/\&lt;includeonly\&gt;|}}\&lt;\/includeonly\&gt;/ig
+# lst ist damit überflüssig
+s/{{#lst:/{{:/g

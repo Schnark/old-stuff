@@ -1,0 +1,152 @@
+@import url("http://localhost/testwiki2/skins/common/commonElements.css");
+@import url("http://localhost/testwiki2/skins/common/commonInterface.css");
+@import url("http://localhost/testwiki2/skins/common/commonContent.css");
+
+#globalWrapper {
+	position: relative;
+}
+
+#p-search {
+	position: fixed;
+	top: 0em;
+	left: 0em;
+	width: 100%;
+	height: 10em;
+	background-color: yellow;
+	border-bottom: 1px solid red;
+	z-index: 10;
+}
+#p-search > h5 {
+	display: none;
+}
+#p-search #searchBody {
+	width: 100%;
+	height: 2em;
+	margin-left: 10em;
+	margin-top: 1em;
+}
+#p-search #searchInput {
+	width: 60%;
+}
+#p-cactions {
+	position: fixed;
+	top: 3em;
+	left: 0em;
+	height: 1em;
+	width: 50%;
+	z-index: 11;
+	font-size: small;
+}
+#p-cactions > h5 {
+	display: none;
+}
+#p-cactions ul {
+	list-style: none;
+	margin-left: 10em;
+	margin-right: 1em;
+}
+#p-cactions li {
+	float: left;
+}
+#p-cactions li + li::before {
+	content: "/";
+}
+#p-personal {
+	position: fixed;
+	top: 3em;
+	right: 0em;
+	text-align: right;
+	height: 1em;
+	width: 50%;
+	z-index: 11;
+	font-size: small;
+}
+#p-personal > h5 {
+	display: none;
+}
+#p-personal ul {
+	list-style: none;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+#p-personal li {
+	float: left;
+}
+#p-personal li + li::before {
+	content: "/";
+}
+#p-logo {
+	position: fixed;
+	top: 0em;
+	left: 0em;
+	z-index: 11;
+}
+#p-logo > a {
+	display: block;
+	width: 9em;
+	height: 9em;
+	background-repeat: no-repeat;
+}
+#column-one {
+	position: absolute;
+	top: 10em;
+	left: 0em;
+	width: 10em;
+}
+#p-navigation {
+}
+#p-tb {
+}
+
+#column-content {
+	position: absolute;
+	top: 10em;
+	left: 10em;
+	max-width: 50em;
+	margin-left: 2px;
+	border-left: 1px solid red;
+	padding-left: 2em;
+}
+
+#footer {
+/* FIXME */
+}
+
+#toc {
+	position: fixed;
+	display: block;
+	top: 11em;
+	right: 1em;
+	width: 2em;
+	height: 2em;
+	max-height: 20em;
+	max-width: 25em;
+	overflow: none;
+	z-index: 10;
+	border: 1px solid red;
+	border-radius: 2em;
+	padding: 1em;
+	background-color: yellow;
+}
+
+#toc ul {
+	display: none;
+	list-style: none;
+}
+#toc #toctitle {
+	display: none;
+}
+#toc #toctitle .toctoggle {
+	display: none;
+}
+#toc:hover {
+	width: auto;
+	height: auto;
+	overflow: auto;
+}
+#toc:hover #toctitle {
+	display: block;
+}
+#toc:hover ul {
+	display: block;
+}

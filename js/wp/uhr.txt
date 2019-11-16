@@ -1,0 +1,35 @@
+<div style="height:{{{Durchmesser|150}}}px; width:{{{Durchmesser|150}}}px; background:{{{Farbe|#ccc}}}; position:relative; text-align:center; border-radius:{{#expr:{{{Durchmesser|150}}}/2}}px; border:{{{Rahmen|none}}};">
+{{Vorlage:Animierte Uhr/Zeiger|Länge={{#expr:{{{Durchmesser|150}}}/3.5}}|Breite={{#expr:{{{Durchmesser|150}}}/15}}|Durchmesser={{{Durchmesser|150}}}|Farbe={{{Stundenzeiger|{{{Zeiger|#555}}}}}}|Grad={{#expr: {{#timel:h}} * 30 + {{#timel:i}}*0.5 round 0}}|Animation=43200}}
+{{Vorlage:Animierte Uhr/Zeiger|Länge={{#expr:{{{Durchmesser|150}}}/2.5}}|Breite={{#expr:{{{Durchmesser|150}}}/20}}|Durchmesser={{{Durchmesser|150}}}|Farbe={{{Minutenzeiger|{{{Zeiger|#555}}}}}}|Grad={{#expr: {{#timel:i}} * 6 + {{#timel:s}}*0.1 round 0}}|Animation=3600}}
+{{Vorlage:Animierte Uhr/Zeiger|Länge={{#expr:{{{Durchmesser|150}}}/2}}|Breite={{#expr:{{{Durchmesser|150}}}/50}}|Durchmesser={{{Durchmesser|150}}}|Farbe={{{Sekundenzeiger|{{{Zeiger|#700}}}}}}|Grad={{#expr: {{#timel:s}} * 6}}|Animation=60}}
+<div style="height:{{#expr:{{{Durchmesser|150}}}/15}}px; width:{{#expr:{{{Durchmesser|150}}}/15}}px; background-color: {{{Zeiger|#000}}}; border-radius:{{#expr:{{{Durchmesser|150}}}/30}}px; position:absolute; top:{{#expr:{{{Durchmesser|150}}}/2-{{{Durchmesser|150}}}/30}}px; left:{{#expr:{{{Durchmesser|150}}}/2-{{{Durchmesser|150}}}/30}}px;"></div>
+</div>
+
+
+<div style="height:{{#expr:{{{Länge|10}}}*2}}px; width:{{{Breite|2}}}px; position: absolute; top:{{#expr:{{{Durchmesser|{{{Länge|10}}}*2}}}/2-{{{Länge|10}}}}}px; left:{{#expr:{{{Durchmesser|{{{Länge|10}}}*2}}}/2-{{{Breite|2}}}/2}}px; -webkit-animation: {{{Animation}}}s linear infinite rotate; -moz-animation: {{{Animation}}}s linear infinite rotate; animation: {{{Animation}}}s linear infinite rotate;">
+<div style="height:{{#expr:{{{Länge|10}}}*2}}px; width:{{{Breite|2}}}px; -webkit-transform:rotate({{{Grad|0}}}deg); -moz-transform:rotate({{{Grad|0}}}deg); -o-transform:rotate({{{Grad|0}}}deg); transform:rotate({{{Grad|0}}}deg);">
+<div style="height:{{{Länge|10}}}px; width:{{{Breite|2}}}px; left:0; background:{{{Farbe|#AAA}}}; border-radius:{{{Breite|2}}}px;"></div>
+</div></div>
+
+
+
+
+
+<div style="height:150px; width:150px; background:#ccc; position:relative; text-align:center; border-radius:75px;">
+<div style="height:90px; width:10px; position: absolute; top:30px; left:70px; -webkit-animation: 43200s linear infinite rotate; -moz-animation: 43200s linear infinite rotate; animation: 43200s linear infinite rotate;">
+<div style="height:90px; width:10px; -webkit-transform:rotate({{#expr: {{#timel:h}} * 30 + {{#timel:i}}*0.5 round 0}}deg); -moz-transform:rotate({{#expr: {{#timel:h}} * 30 + {{#timel:i}}*0.5 round 0}}deg); -o-transform:rotate({{#expr: {{#timel:h}} * 30 + {{#timel:i}}*0.5 round 0}}deg); transform:rotate({{#expr: {{#timel:h}} * 30 + {{#timel:i}}*0.5 round 0}}deg);">
+<div style="height:45px; width:10px; left:0; background:#555; border-radius:10px;"></div>
+</div></div>
+<div style="height:120px; width:8px; position: absolute; top:15px; left:71px; -webkit-animation: 3600s linear infinite rotate; -moz-animation: 3600s linear infinite rotate; animation: 3600s linear infinite rotate;">
+<div style="height:120px; width:8px; -webkit-transform:rotate({{#expr: {{#timel:i}} * 6 + {{#timel:s}}*0.1 round 0}}deg); -moz-transform:rotate({{#expr: {{#timel:i}} * 6 + {{#timel:s}}*0.1 round 0}}deg); -o-transform:rotate({{#expr: {{#timel:i}} * 6 + {{#timel:s}}*0.1 round 0}}deg); transform:rotate({{#expr: {{#timel:i}} * 6 + {{#timel:s}}*0.1 round 0}}deg);">
+<div style="height:60px; width:8px; left:0; background:#555; border-radius:8px;"></div>
+</div></div>
+<div style="height:150px; width:3px; position: absolute; top:0px; left:74px; -webkit-animation: 60s linear infinite rotate; -moz-animation: 60s linear infinite rotate; animation: 60s linear infinite rotate;">
+<div style="height:150px; width:3px; -webkit-transform:rotate({{#expr: {{#timel:s}} * 6}}deg); -moz-transform:rotate({{#expr: {{#timel:s}} * 6}}deg); -o-transform:rotate({{#expr: {{#timel:s}} * 6}}deg); transform:rotate({{#expr: {{#timel:s}} * 6}}deg);">
+<div style="height:75px; width:3px; left:0; background:#700; border-radius:3px;"></div>
+</div></div>
+<div style="height:10px; width:10px; background-color: #000; border-radius:5px; position:absolute; top:70px; left:70px;"></div>
+</div>
+
+
+

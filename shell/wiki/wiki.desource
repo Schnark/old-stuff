@@ -1,0 +1,31 @@
+#!/usr/bin/sed -f
+
+#SERVER localurl übertragen
+
+# Lokalisierungen
+
+s/#WEITERLEITUNG/#REDIRECT/i
+s/\[\[Image:/\[\[Datei:/gi
+s/\[\[File:/\[\[Datei:/gi
+s/\[\[Bild:/\[\[Datei:/gi
+s/{{SEITENTITEL:/{{DISPLAYTITLE:/
+s/{{SORTIERUNG:/{{DEFAULTSORT:/
+s/&lt;abschnitt anfang/\&lt;section begin/ig
+s/&lt;abschnitt ende/\&lt;section end/ig
+
+# Variablen
+s/{{SITENAME}}/Wikisource/g
+s/{{SERVER}}{{localurl:/{{fullurl:/g
+s/{{SERVER}}/http:\/\/de.wikisource.org/g
+s/{{fullurl:/{{fullurl:de.wikisource.org\/wiki\//gi
+s/{{localurl:\([^|}]*\)[^}]*}}/\/wiki\/\1/gi
+s/{{SUBJECTPAGENAMEE}}/{{NAMESPACEE}}:{{PAGENAMEE}}/g
+s/{{REVISIONID}}/0/g
+s/{{REVISIONDAY}}/0/g
+s/{{REVISIONMONTH}}/0/g
+s/{{REVISIONYEAR}}/0/g
+s/&lt;pagequality [^\/]*\/&gt;/\&lt;!--&--\&gt;/
+s/|action=edit&amp;image=\([^ ]*\) /|action=edit\&amp;image={{urlencode:\1}} /
+
+# Namensraum-Aliase
+s/\[\[WS:/\[\[Wikisource:/g

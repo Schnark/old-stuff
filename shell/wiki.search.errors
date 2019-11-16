@@ -1,0 +1,8 @@
+#!/bin/sh
+#wiki.search.errors datenbank.xml.bz2
+#
+#sucht nach Standardfehlern
+#
+
+wiki.search.regex $1 '\[\[Kategorie:(.*)(,.*)?( \([^\)]*\))?\|\1\]\]' > katsort
+wiki.search.regex $1 '\[\[Kategorie:(Wikipedia:Quellen fehlen|Wikipedia:Überarbeiten|Wikipedia:Neutralität|Wikipedia:Lückenhaft|Wikipedia:Qualitätssicherung|LogoSH-Bild|Frei-Bild|CC-by-|Public-Domain-Bild \(|GFDL-Bild|Datei:Musikzitat|Datei:Wikimedia-Copyright|Wikipedia:Deutschlandlastig|Wikipedia:Falschschreibung|Wikipedia:Begriffsklärung|Wikipedia:WikiBaustelle)' > direktekat

@@ -1,0 +1,26 @@
+#!/usr/bin/sed -f
+
+# von <poem> bis </poem> oder Artikelende
+/&lt; *poem.*&gt;/,/&lt; *\/poem *&gt;\|<\/text>\|<\/comment>/ {
+# erste und letzte Zeile auskommentieren
+/&lt; *\/\?poem/ {
+s/&lt; *\/\?poem.*&gt;/\&lt;!--&--\&gt;/
+b
+}
+# " ignorieren, vor nächste Zeile keinen Doppelpunkt
+/^"$/ {
+h
+b
+}
+# : voranstellen
+x
+/^"$/ {
+s/"//
+x
+b
+}
+x
+s/^.\+$/:&/
+# leere Zeilen zu <br />
+s/^$/\&lt;br \/\&gt;/
+}

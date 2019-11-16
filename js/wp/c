@@ -1,0 +1,62 @@
+Latin
+0041..005A, 0061..007A, 00AA, 00BA, 00C0..00D6, 00D8..00F6, 00F8..02B8, 02E0..02E4, 1D00..1D25, 1D2C..1D5C, 1D62..1D65, 1D6B..1D77, 1D79..1DBE, 1E00..1EFF +
+
+Greek
+0370..03FF, 1D26..1D2A, 1F00..1FFE +
+
+Cyrillic
+0400..0527 +
+
+
+
+
+
+Zeichen
+
+hervorhebenswert
+M (ohne CGJ) [0300..036F, ..., 1DC0..1DE6, 1DFC..1DFF, 20D0..20F0, ...]
+NBSP [00A0], THINSP (außer Quelltext)
+SHY [00AD] (je nach Seite)
+
+böse
+CGJ
+SHY [00AD] (je nach Seite)
+Z außer SPACE, NBSP, THINSP (nur im Quelltext) [1680, 180E, 2000..200A, 2028, 2029, 202F, 205F, 3000]
+Cn
+Cc außer TAB, CR/LF [0000..001F, 007F..009F]
+Cf außer SHY, ZWNJ, ZWJ, LRM, RLM [0600..0603, 06DD, 070F, 17B4, 17B5, 200B..200F, 202A..202E, 2060..2064, 206A..206F, FEFF, FFF9..FFFB, P+]
+Co [E000..F8FF, P+]
+Pd außer HYPHEN-MINUS, EM, EN, MINUS [058A, 05BE, 1400, 1806, 2010..2015, 2E17, 2E1A, 301C, 3030, 30A0, FE31, FE32, FE58, FE63, FF0D]
+Sk, Lm [005E, 0060, 00A8, 00AF, 00B4, 00B8, 02B0..02FF, ...]
+
+ArabicCompat (Initial, Medial, Final, Isolated) ~ [FB50..FDFF]
+WideNarrow (Wide - 3000, Narrow, Small) [FE50..FE52, FE54..FE6B, FF01..FFBE, FFC2..FFC7, FFCA..FFCF, FFD2..FFD7, FFDA..FFDC, FFE0..FFE6, FFE8..FFEE]
+CJKCompat [F900..FAFF]
+Alph Darst [FB00..FB4F]
+VarSel [FE00..FE0F]
+Vert [FE10..FE1F]
+CJKCompat [FE30..FE4F]
+
+-> [F900..FE1F, FE30..FFFF]
+
+Kontext
+ZWNJ, ZWJ
+LRM, RLM
+EM, EN, MINUS
+
+
+charCGJ = '\u034F', //CGJ
+charNBSP = '\u00A0', //NBSP
+charSHY = '\u00AD', //SHY
+charTHINSPACE = '\u2009', //THIN SPACE
+charHORIZONT = '\u2500',
+gcM = '\u0300-\u034E\u0350-\u036F\u1DC0-\u1DFF\u20D0-\u20F0 TODO \u20F1-\u20FF\uFE20-\uFE2F', //gc = M ohne U+034F (CGJ), unvollständig, zusätzlich einige nicht zugewiesene Zeichen in entsprechenden Blöcken
+gcZ = '\u1680\u180E\u2000-\u2008\u200A\u2028\u2029\u202F\u205F\u3000', //gc = Z ohne U+0020 (SPACE), U+00A0 (NBSP), U+2009 (THIN SPACE)
+gcCn = '', //gc = Cn TODO
+gcCc = '\u0000-\u0008\u000B\u000C-\u001F\u007F-\u009F', //gc = Cc ohne U+0009 (TAB), U+000A (LF)
+gcCf = 'TODO 0600..0603, 06DD, 070F, 17B4, 17B5, 200B..200F, 202A..202E, 2060..2064, 206A..206F, FEFF, FFF9..FFFB', //gc = Cf ohne SHY, ZWNJ, ZWJ, LRM, RLM und Zeichen außerhalb Plane 0
+gcCo = '\uE000-\uF8FF', //gc = Co ohne Zeichen außerhalb Plane 0
+gcPd = 'TODO 058A, 05BE, 1400, 1806, 2010..2015, 2E17, 2E1A, 301C, 3030, 30A0, FE31, FE32, FE58, FE63, FF0D', //gc = Pd ohne HYPHEN-MINUS, EM, EN, MINUS
+gcSkLm = '\u005E\u0060\u00A8\u00AF\u00B4\u00B8\u02B0-\u02FF', //gc = Sk und gc = Lm, unvollständig
+compat = '\uF900-\uFE1F\uFE30-\uFEFE\uFF00-\uFFFF', //Zeichen aus den letzten Blöcken
+unerwuenscht = '\u2155-\u218F\u2625-\u2629\u2670\u2671\u2716-\u27BF', //unerwünschte Zahlzeichen, Dingbats, etc.

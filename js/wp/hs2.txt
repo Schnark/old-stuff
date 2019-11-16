@@ -1,0 +1,230 @@
+== [[Datei:Ich.jpg|ohne|20px|link=|alt=]] asdf ==
+h2 div {
+	border: 1px solid gray;
+	border-radius: 50%;
+	display: inline;
+}
+
+<div id="wikipedia-hauptseite-test">
+Bitte folgendes CSS noch einbinden:
+<syntaxhighlight lang="css">
+#wikipedia-hauptseite-test {
+	display: none; /*kann weg*/
+}
+
+/* Allgemeine Struktur */
+.wikipedia-hauptseite-links {
+	float: left;
+	width: 50%;
+}
+.wikipedia-hauptseite-rechts {
+	float: right;
+	width: 50%;
+}
+.wikipedia-hauptseite-unten {
+	clear: both;
+}
+
+/* Allgemeine Struktur (schmale Fenster) */
+@media screen and (max-width: 700px) {
+	.wikipedia-hauptseite-links,
+	.wikipedia-hauptseite-rechts {
+		float: none;
+		width: auto;
+	}
+}
+
+/* Allgemeines Aussehen (alle Skins, zusätzlicher Abschnitt für Vector) */
+.wikipedia-hauptseite-kasten {
+	margin-bottom: 1em;
+}
+.wikipedia-hauptseite-links .wikipedia-hauptseite-kasten {
+	margin-right: 0.5em;
+}
+.wikipedia-hauptseite-rechts .wikipedia-hauptseite-kasten {
+	margin-left: 0.5em;
+}
+.wikipedia-hauptseite-kasten h2 {
+	background-color: #d8e8ff;
+	border: 1px solid #8898bf;
+	margin: 0;
+	padding: 0.1em 0;
+	font-size: 1em;
+	font-weight: bold;
+	text-indent: 0.8em;
+}
+.wikipedia-hauptseite-kasten h2 .thumb {
+	display: none;
+}
+.wikipedia-hauptseite-inhalt {
+	background: #fff;
+	padding: 0.3em 0.8em 0.4em;
+	border: 1px solid #8898bf;
+	border-top: 0;
+}
+.wikipedia-hauptseite-inhalt hr {
+	background: #a7d7f9;
+	color: #a7d7f9;
+	height: 1px;
+	margin: 0.5em 0;
+}
+.wikipedia-hauptseite-fusszeile {
+	margin-top: 0.8em;
+	clear: both;
+	font-size: 95%;
+	text-align: right;
+}
+
+/* Allgemeines Aussehen (Vector-Skin) */
+.skin-vector .wikipedia-hauptseite-kasten {
+	border: 1px solid #a7d7f9;
+	border-radius: 5px;
+}
+.skin-vector .wikipedia-hauptseite-kasten h2 {
+	margin: 5px;
+	background: -moz-linear-gradient(to right, #d8e8ff, #fff);
+	border: none;
+	border-radius: 2px;
+	maxheight: 40px;
+}
+.skin-vector .wikipedia-hauptseite-kasten .thumb {
+	border-radius: 50%;
+	vertical-align: center;
+	display: inline;
+}
+.skin-vector .wikipedia-hauptseite-inhalt {
+	border: 0;
+}
+.skin-vector .wikipedia-hauptseite-inhalt hr {
+	background: #8898bf;
+	color: #8898bf;
+}
+.skin-vector .wikipedia-hauptseite-fusszeile {
+	border-top: 1px solid #ccc;
+}
+
+/* Einzelne Bereiche */
+/*Selektor*/ #catlinks,
+/*Selektor*/.action-view h1.firstHeading,
+/*Selektor*/.action-view #contentSub {
+	display: none;
+}
+.wikipedia-hauptseite-oben h2,
+.wikipedia-hauptseite-unten h2 {
+	text-align: center;
+}
+#wikipedia-hauptseite-willkommen h3 {
+	float: left;
+	font-weight: bold;
+	font-size: 100%;
+	padding-right: 1em;
+}
+#wikipedia-hauptseite-lesen li,
+#wikipedia-hauptseite-mitmachen li,
+#wikipedia-hauptseite-schwesterprojekte-links li {
+	white-space: nowrap;
+	list-style: none;
+	display: inline-block;
+	padding-left: 1em;
+}
+#wikipedia-hauptseite-willkommen li li {display:none;}
+
+#wikipedia-hauptseite-lesen ul,
+#wikipedia-hauptseite-mitmachen ul,
+#wikipedia-hauptseite-schwesterprojekte-links ul {
+	margin: 0;
+	text-align: center;
+}
+#wikipedia-hauptseite-schwesterprojekte-links a {
+	background: none !important;
+	padding-right: 0px !important;
+}
+</syntaxhighlight>
+</div>
+<div id="wikipedia-hauptseite">
+<div id="wikipedia-hauptseite-willkommen" class="wikipedia-hauptseite-kasten wikipedia-hauptseite-oben">
+== Willkommen bei Wikipedia ==
+<div class="wikipedia-hauptseite-inhalt">
+{{#tag:inputbox|type=search|width=50|placeholder=Finde einen von {{ARTIKELANZAHL}} Artikeln}}
+[[Wikipedia]] ist ein Projekt zum Aufbau einer Enzyklopädie aus [[Freie Inhalte|freien Inhalten]] in über 280&nbsp;Sprachen.
+<div id="wikipedia-hauptseite-lesen">
+=== Lesen! ===
+Gemeinschaftlich haben wir schon {{ARTIKELANZAHL}}&nbsp;Artikel in deutscher Sprache geschrieben.
+* [[Portal:Wikipedia nach Themen|Artikel nach Themen]]
+** [[Portal:Geographie|Geographie]]
+** [[Portal:Geschichte|Geschichte]]
+** [[Portal:Gesellschaft|Gesellschaft]]
+** [[Portal:Kunst und Kultur|Kunst und Kultur]]
+** [[Portal:Religion|Religion]]
+** [[Portal:Sport|Sport]]
+** [[Portal:Technik|Technik]]
+** [[Portal:Wissenschaft|Wissenschaft]]
+* [[:Kategorie:!Hauptkategorie|Artikel nach Kategorien]]
+* [[Spezial:Alle Seiten|Alphabetischer Index]]
+* [[Portal:Gesprochene Wikipedia|Gesprochene Wikipedia]]
+</div>
+<div id="wikipedia-hauptseite-mitmachen">
+=== Mitmachen! ===
+Auch du kannst dich mit deinem Wissen beteiligen.
+* [[Hilfe:Neu bei Wikipedia|Neu bei Wikipedia]]
+* [[Wikipedia:Kontakt|Kontakt]]
+* [[Wikipedia:Mentorenprogramm]]
+</div>
+</div>
+</div>
+<div class="wikipedia-hauptseite-links">
+<!--{{Wikipedia:Hauptseite/Wikipedia aktuell}}-->
+<div id="wikipedia-hauptseite-artikel" class="wikipedia-hauptseite-kasten">
+== Artikel des Tages ==
+<div id="mf-tfa" class="wikipedia-hauptseite-inhalt" title="Artikel des Tages">
+{{Wikipedia:Hauptseite/Artikel des Tages/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+{{Wikipedia:Hauptseite/Artikel des Tages/Links}}
+</div></div></div>
+<div id="wikipedia-hauptseite-ereingnisse" class="wikipedia-hauptseite-kasten">
+== Was geschah am {{LOCALDAY}}. {{LOCALMONTHNAME}}? ==
+<div class="wikipedia-hauptseite-inhalt">
+{{Wikipedia:Hauptseite/Jahrestage/{{LOCALMONTHNAME}}/{{LOCALDAY}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALDAY}}. {{LOCALMONTHNAME}}|Weitere Ereignisse]]
+</div></div></div>
+</div>
+<div class="wikipedia-hauptseite-rechts">
+<div id="wikipedia-hauptseite-nachrichten" class="wikipedia-hauptseite-kasten">
+== In den Nachrichten ==
+<div id="mf-itn" class="wikipedia-hauptseite-inhalt" title="In den Nachrichten">
+{{Wikipedia:Hauptseite/Aktuelles}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALMONTHNAME}} {{LOCALYEAR}}|Weitere aktuelle Ereignisse]]&nbsp;· [[n:Hauptseite|Wikinews]]
+</div></div></div>
+<div id="wikipedia-hauptseite-verstorbene" class="wikipedia-hauptseite-kasten">
+== Kürzlich Verstorbene ==
+<div id="mf-nec" class="wikipedia-hauptseite-inhalt" title="Kürzlich Verstorbene">
+{{Hauptseite Verstorbene}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[Nekrolog {{LOCALYEAR}}|Weitere kürzlich Verstorbene]]
+</div></div></div>
+<div id="wikipedia-hauptseite-wissenswertes" class="wikipedia-hauptseite-kasten">
+== Schon gewusst? ==
+<div id="mf-dyk" class="wikipedia-hauptseite-inhalt" title="Schon gewusst?">
+{{Wikipedia:Hauptseite/Schon gewusst/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[Spezial:Neue Seiten|Weitere neue Artikel]]&nbsp;· [[Wikipedia:Hauptseite/Schon gewusst/Archiv|Frühere Schon-gewusst-Artikel]]
+</div></div></div>
+</div>
+<div id="wikipedia-hauptseite-schwesterprojekte" class="wikipedia-hauptseite-kasten wikipedia-hauptseite-unten">
+== Schwesterprojekte ==
+<div id="wikipedia-hauptseite-schwesterprojekte-links" class="wikipedia-hauptseite-inhalt">
+* [[Datei:Wikimedia Community Logo.svg|20px|link={{fullurl:m:Hauptseite|uselang={{INT:Lang}}}}|Meta-Wiki|alt=]] [{{fullurl:m:Hauptseite|uselang={{INT:Lang}}}} Meat-Wiki] – Koordination
+* [[Datei:Commons-logo.svg|18px|link={{fullurl:commons:Hauptseite|uselang={{INT:Lang}}}}|Commons|alt=]] [{{fullurl:commons:Hauptseite|uselang={{INT:Lang}}}} Commons] – Medien
+* [[Datei:Wiktionary small.svg|20px|link=wikit:Wiktionary:Hauptseite|Wiktionary|alt=]] [[wikt:Wiktionary:Hauptseite|Wiktionary]] – Wörterbuch
+* [[b:Hauptseite|Wikibooks]] – Lehrbücher
+* [[q:Hauptseite|Wikiquote]] – Zitate
+* [[s:Hauptseite|Wikisource]] – Quellen
+* [[n:Hauptseite|Wikinews]] – Nachrichten
+</div>
+</div>
+</div>
+<!--[[Kategorie:Wikipedia:Hauptseite| ]]
+{{Wikipedia:Hauptseite/Interwikis}}-->
+__NOEDITSECTION____NOTOC__

@@ -1,0 +1,27 @@
+#!/usr/bin/sed -f
+
+# Lokalisierungen
+
+s/#WEITERLEITUNG/#REDIRECT/i
+s/\[\[Image:/\[\[Datei:/gi
+s/\[\[File:/\[\[Datei:/gi
+s/\[\[Bild:/\[\[Datei:/gi
+s/{{SEITENTITEL:/{{DISPLAYTITLE:/
+s/{{SORTIERUNG:/{{DEFAULTSORT:/
+s/{{SEITENNAME}}/{{PAGENAME}}/g
+s/{{ZAHLENFORMAT:/{{formatnum:/g
+
+# Variablen
+
+s/{{SITENAME}}/Wikipedia/g
+s/{{SERVER}}{{localurl:/{{fullurl:/g
+s/{{fullurl:/{{fullurl:de.wikipedia.org\/wiki\//gi
+s/{{SUBJECTSPACE}}/{{NAMESPACE}}/g
+s/{{SUBJECTPAGENAME}}/{{NAMESPACE}}:{{PAGENAME}}/g
+s/{{SUBJECTPAGENAMEE}}/{{NAMESPACEE}}:{{PAGENAMEE}}/g
+s/{{NUMBEROFARTICLES}}/1.000.000/g
+
+# Namensraum-Aliase
+
+s/\[\[WP:/\[\[Wikipedia:/g
+s/\[\[P:/\[\[Portal:/g

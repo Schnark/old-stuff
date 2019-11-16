@@ -1,0 +1,20 @@
+#!/bin/sh
+#wiki.search.article datenbank.xml.bz2 'Titel' > ausgabe
+#
+#gibt den Quelltext des gewünschten Artikels aus
+#
+bzcat $1 | sed -n '
+/<title>'$2'<\/title>/,/<\/text>/ {
+/<text/,/text>/ {
+h
+s/ *<text xml:space="preserve">//
+s/<\/text>//
+s/&lt;/</g
+s/&gt;/>/g
+s/&quot;/"/g
+s/&amp;/\&/g
+p
+g
+/text>/ q
+}
+}'

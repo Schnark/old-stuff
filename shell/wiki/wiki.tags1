@@ -1,0 +1,29 @@
+#!/usr/bin/sed -nf
+
+# erste Zeile speichern
+1 {
+h
+b
+}
+
+# bei zu entfernenden Zeilen
+/^"$/ {
+# nächste Zeile lesen
+n
+# und ohne Zeilenumbruch anhängen
+H
+g
+s/\n//
+h
+b
+}
+
+# gespeicherte Zeile ausgeben
+x
+p
+
+# letzte Zeile
+$ {
+x
+p
+}

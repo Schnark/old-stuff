@@ -1,0 +1,10 @@
+#!/usr/bin/sed -f
+
+s/&lt; *timeline.*&gt;/\&amp;#x5B;Timeline\&amp;#x5D;\&lt;!--&/
+s/&lt; *\/timeline *&gt;/&--\&gt;/
+
+s/&lt; *gallery.*&gt;/\&amp;#x5B;Gallery\&amp;#x5D;\&lt;!--&/
+s/&lt; *\/gallery *&gt;/&--\&gt;/
+
+s/&lt; *categorytree.*&gt;/\&amp;#x5B;Categorytree\&amp;#x5D;\&lt;!--&/
+s/&lt; *\/categorytree *&gt;/&--\&gt;/

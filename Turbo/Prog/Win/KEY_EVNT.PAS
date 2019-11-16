@@ -1,0 +1,96 @@
+unit key_evnt;
+interface
+type tastenart = (NONE, K_DOWN, K_UP, C_NORM, C_SONDER);
+type taste = record
+     art: tastenart;
+     nr: byte;
+end;
+
+const T_ESC=1; T_1=2; T_2=3; T_3=4;
+      T_4=5; T_5=6; T_6=7; T_7=8; T_8=9;
+      T_9=10; T_0=11; T_SS=12; T_APO=13; T_BS=14;
+      T_TAB=15; T_q=16; T_w=17; T_e=18; T_r=19;
+      T_t=20; T_z=21; T_u=22; T_i=23; T_o=24;
+      T_p=25; T_ue=26; T_PLUS=27; T_ENTER=28; T_STRG=29;
+      T_a=30; T_s=31; T_d=32; T_f=33; T_g=34;
+      T_h=35; T_j=36; T_k=37; T_l=38; T_oe=39;
+      T_ae=40; T_DACH=41; T_SHIFT_L=42; T_RAUTE=43; T_y=44;
+      T_x=45; T_c=46; T_v=47; T_b=48; T_n=49;
+      T_m=50; T_KOMMA=51; T_PUNKT=52; T_MINUS=53{auch / NUM}; T_SHIFT_R=54;
+      T_MAL_NUM=55; T_ALT=56; T_SP=57; T_CAPS=58; T_F1=59;
+      T_F2=60; T_F3=61; T_F4=62; T_F5=63; T_F6=64;
+      T_F7=65; T_F8=66; T_F9=67; T_F10=68; T_NUM=69;
+      T_ROLLEN=70; T_POS1=71; T_UP=72; T_PUP=73; T_MINUS_NUM=74;
+      T_LEFT=75; T_5NUM=76; T_RIGHT=77; T_PLUS_NUM=78; T_ENDE=79;
+      T_DOWN=80; T_PDOWN=81; T_EINF=82; T_ENTF=83;
+      T_KLEINER=86; T_F11=87; T_F12=88;
+      T_PAUSE=97; T_SONDER=122;
+const S_F1 = 59;
+      S_F2 = 60;
+      S_F3 = 61;
+      S_F4 = 62;
+      S_F5 = 63;
+      S_F6 = 64;
+      S_F7 = 65;
+      S_F8 = 66;
+      S_F9 = 67;
+      S_F10 = 68;
+      S_POS1 = 71;
+      S_UP = 72;
+      S_PUP = 73;
+      S_LEFT = 75;
+      S_RIGHT = 77;
+      S_ENDE = 79;
+      S_DOWN = 80;
+      S_PDOWN = 81;
+      S_EINF = 82;
+      S_ENTF = 83;
+
+procedure get_zeichen(var z: taste);
+procedure get_taste(var t: taste);
+
+procedure get_key(var k: taste);
+
+implementation
+uses crt;
+var alt: byte;
+
+procedure get_zeichen(var z: taste);
+var c: byte;
+begin
+ c:=ord(readkey);
+ if (c=0) and keypressed then begin
+    z.nr:=ord(readkey);
+    z.art:=C_SONDER;
+ end else begin
+    z.nr:=c;
+    z.art:=C_NORM;
+ end;
+end;
+
+procedure get_taste(var t: taste);
+var e: byte;
+begin
+ e:=port[$60];
+ if e div 128 = 0 then t.art:=K_DOWN else t.art:=K_UP;
+ e:= e mod 128; if e=T_SONDER then t.art:=K_DOWN;
+ t.nr:=e;
+end;
+
+procedure get_key(var k: taste);
+begin
+if keypressed then
+   get_zeichen(k)
+else begin
+   if port[$60]<>alt then begin
+      get_taste(k);
+      alt:=port[$60];
+   end else begin
+      k.art:=NONE; k.nr:=0;
+   end;
+end;
+end;
+
+begin
+alt:=port[$60];
+end.

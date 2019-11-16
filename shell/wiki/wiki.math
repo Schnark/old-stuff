@@ -1,0 +1,58 @@
+#!/usr/bin/sed -nf
+
+# von <math> bis </math> oder Artikelende
+/&lt;math&gt;/,/&lt;\/math&gt;\|<\/text>\|<\/comment>/I {
+# erste Zeile speichern
+/&lt;math&gt;/ {
+h
+b
+}
+# speichern
+H
+# bei letzter Zeile auswerten
+/<\/text>\|<\/comment>/ {
+g
+p
+}
+/&lt;\/math&gt;/I {
+g
+# Zeug entfernen
+s/\n"\n//g
+s/&lt;\/\?math&gt;//g
+y/\n/ /
+# HTML
+s/&lt;/</g
+s/&gt;/>/g
+# ' escapen
+s/'/'"'"'/g
+# Programm aufrufen
+s/.*/texvc_ '&'/
+e
+/./ {
+# doppelte kursiv weg
+s/<\/i><i>//g
+s/''/<nowiki>''<\/nowiki>/g
+s/{{/<nowiki>{{<\/nowiki>/g
+s/\[/<nowiki>[<\/nowiki>/g
+s/|/\&#124;/g
+s/!!/<nowiki>!!<\/nowiki>/g
+# HTML maskieren
+s/&/\&amp;/g
+s/"/\&quot;/g
+s/</\&lt;/g
+s/>/\&gt;/g
+x
+s/^/\&lt;!--/
+s/$/--\&gt;/
+H
+g
+s/\n//
+p
+b
+}
+g
+p
+}
+b
+}
+p

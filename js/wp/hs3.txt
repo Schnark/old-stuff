@@ -1,0 +1,282 @@
+<div id="wikipedia-hauptseite-test">
+Folgendes CSS ist zusätzlich für die korrekte Darstellung nötig:
+<syntaxhighlight lang="css">
+#wikipedia-hauptseite-test {
+	display: none;
+}
+
+/* Allgemeine Struktur */
+#wikipedia-hauptseite-links {
+	float: left;
+	width: 57%;
+}
+#wikipedia-hauptseite-rechts {
+	float: right;
+	width: 43%;
+}
+#wikipedia-hauptseite-unten {
+	clear: both;
+}
+
+/* Allgemeine Struktur (schmale Fenster) */
+@media screen and (max-width: 900px) {
+	#wikipedia-hauptseite-links,
+	#wikipedia-hauptseite-rechts {
+		float: none;
+		width: auto;
+	}
+}
+
+/* Allgemeines Aussehen (alle Skins, zusätzlicher Abschnitt für Vector) */
+.wikipedia-hauptseite-kasten {
+	background-color: #fff;
+	margin-bottom: 4px;
+}
+#wikipedia-hauptseite-links .wikipedia-hauptseite-kasten {
+	margin-right: 2px;
+}
+#wikipedia-hauptseite-rechts .wikipedia-hauptseite-kasten {
+	margin-left: 2px;
+}
+.wikipedia-hauptseite-kasten h2 {
+	background-color: #d8e8ff;
+	border: 1px solid #8898bf;
+	margin: 0;
+	padding: 0.1em 0;
+	font-size: 1em;
+	font-weight: bold;
+	text-indent: 0.8em;
+}
+.wikipedia-hauptseite-zentriert h2 {
+	text-align: center;
+	text-indent: 0;
+}
+.wikipedia-hauptseite-meta h2 {
+	background-color: #d8ffd8;
+}
+.wikipedia-hauptseite-kasten h2 img {
+	display: none;
+}
+.wikipedia-hauptseite-kasten h3 {
+	border: none;
+	font-size: 1em;
+	font-weight: bold;
+}
+.wikipedia-hauptseite-inhalt {
+	padding: 0.3em 0.8em 0.4em;
+	border: 1px solid #8898bf;
+	border-top: 0;
+}
+.wikipedia-hauptseite-inhalt hr {
+	background: #a7d7f9;
+	color: #a7d7f9;
+	height: 1px;
+	margin: 0.5em 0;
+}
+.wikipedia-hauptseite-fusszeile {
+	margin-top: 0.8em;
+	clear: both;
+	font-size: 95%;
+	text-align: right;
+}
+
+/* Allgemeines Aussehen (Vector-Skin) */
+.skin-vector #wikipedia-hauptseite {
+	background-color: #fff;
+}
+.skin-vector .wikipedia-hauptseite-kasten {
+	background-color: transparent;
+	border: 1px solid #a7d7f9;
+	border-radius: 5px;
+}
+.skin-vector .wikipedia-hauptseite-kasten h2 {
+	margin: 10px 5px;
+	padding: 0;
+	text-indent: 0;
+	background: -moz-linear-gradient(to right, #d8e8ff, #fff);
+	border: none;
+	border-radius: 13px;
+	height: 26px;
+	font-size: 20px;
+	overflow: visible;
+}
+.skin-vector .wikipedia-hauptseite-meta h2 {
+	background: -moz-linear-gradient(to right, #d8ffd8, #fff);
+}
+.skin-vector .wikipedia-hauptseite-zentriert h2 {
+	padding: 5px;
+	height: 16px;
+	background: #d8e8ff;
+}
+.skin-vector .wikipedia-hauptseite-kasten h2 span {
+	display: inline-block;
+	overflow: visible;
+	height: 38px;
+	margin-top: -5px;
+}
+.skin-vector .wikipedia-hauptseite-kasten h2 img {
+	display: inline-block;
+	vertical-align: -60%;
+	margin-left: 6px;
+	margin-right: 16px;
+}
+.skin-vector .wikipedia-hauptseite-inhalt {
+	border: none;
+}
+.skin-vector .wikipedia-hauptseite-inhalt hr {
+	background: #8898bf;
+	color: #8898bf;
+}
+.skin-vector .wikipedia-hauptseite-fusszeile {
+	border-top: 1px solid #ccc;
+}
+.skin-vector #wikipedia-hauptseite-oben {
+	background: url(//upload.wikimedia.org/wikipedia/commons/1/10/Wikipedia-logo-v2-200px-transparent.png) no-repeat -40px -15px;
+}
+
+/* Einzelne Bereiche */
+/*Selektor*/ #catlinks,
+/*Selektor*/.action-view h1.firstHeading,
+/*Selektor*/.action-view #contentSub {
+	display: none;
+}
+
+#wikipedia-hauptseite-oben .wikipedia-hauptseite-inhalt {
+	text-align: center;
+}
+#wikipedia-hauptseite-oben a {
+	font-weight: bold;
+}
+
+#wikipedia-hauptseite-unten ul {
+	margin: 0;
+	text-align: center;
+}
+#wikipedia-hauptseite-unten li {
+	white-space: nowrap;
+	list-style: none;
+	display: inline;
+	padding-left: 1em;
+}
+#wikipedia-hauptseite-unten a {
+	background: none !important;
+	padding-right: 0px !important;
+	font-weight: bold;
+}
+</syntaxhighlight>
+
+Je nach Browser gehst du dabei folgendermaßen vor:
+* Firefox
+*# Drücke {{Taste|Umschalt}}+{{Taste|F4}}
+*# Füge folgenden Code ein: <code><nowiki>mw.util.addCSS('');</nowiki></code>
+*# Drücke {{Taste|Strg}}+{{Taste|R}}
+* Internet Explorer
+*# Drücke {{Taste|F12}}
+*# Wechsle zur Registerkarte „Konsole“
+*# Füge den Code unter Punkt 2 bei Firefox in die untere Zeile ein
+*# Klicke auf den grünen Pfeil neben der Zeile
+</div>
+<div id="wikipedia-hauptseite">
+<div id="wikipedia-hauptseite-oben">
+<div class="wikipedia-hauptseite-kasten wikipedia-hauptseite-zentriert">
+== Willkommen bei Wikipedia ==
+<div class="wikipedia-hauptseite-inhalt">
+{{#tag:inputbox|type=search
+width=60
+placeholder=Finde einen von {{ARTIKELANZAHL}} Artikeln!
+buttonlabel=Exakter Titel
+searchbuttonlabel=Volltext
+break=no}}
+[[Portal:Wikipedia nach Themen|Artikel nach Themen]]: [[Portal:Geographie|Geographie]]&nbsp;– [[Portal:Geschichte|Geschichte]]&nbsp;– [[Portal:Gesellschaft|Gesellschaft]]&nbsp;– [[Portal:Kunst und Kultur|Kunst und Kultur]]&nbsp;– [[Portal:Religion|Religion]]&nbsp;– [[Portal:Sport|Sport]]&nbsp;– [[Portal:Technik|Technik]]&nbsp;– [[Portal:Wissenschaft|Wissenschaft]]
+</div>
+</div>
+</div>
+<div id="wikipedia-hauptseite-links">
+<div id="hauptseite-artikel" class="wikipedia-hauptseite-kasten">
+== [[Datei:HSUtvald.svg|alt=|link=|38px]] Artikel des Tages ==
+<div id="mf-tfa" class="wikipedia-hauptseite-inhalt" title="Artikel des Tages">
+{{Wikipedia:Hauptseite/Artikel des Tages/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+{{Wikipedia:Hauptseite/Artikel des Tages/Links}}
+</div>
+</div>
+</div>
+<div id="hauptseite-ereignisse" class="wikipedia-hauptseite-kasten">
+== [[Datei:HSDagensdatum.svg|alt=|link=|38px]] Was geschah am {{LOCALDAY}}. {{LOCALMONTHNAME}}? ==
+<div class="wikipedia-hauptseite-inhalt">
+{{Wikipedia:Hauptseite/Jahrestage/{{LOCALMONTHNAME}}/{{LOCALDAY}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALDAY}}. {{LOCALMONTHNAME}}|Weitere Ereignisse]]
+</div>
+</div>
+</div>
+<div id="hauptseite-nachrichten" class="wikipedia-hauptseite-kasten">
+== [[Datei:PL Wiki Aktualnosci ikona.svg|alt=|link=|38px]] In den Nachrichten ==
+<div id="mf-itn" class="wikipedia-hauptseite-inhalt" title="In den Nachrichten">
+{{Wikipedia:Hauptseite/Aktuelles}}
+=== Kürzlich Verstorbene ===
+<div id="hauptseite-verstorbene">{{Hauptseite Verstorbene}}</div>
+<div class="wikipedia-hauptseite-fusszeile">
+[[{{LOCALMONTHNAME}} {{LOCALYEAR}}|Weitere aktuelle Ereignisse]]&nbsp;· [[Nekrolog {{LOCALYEAR}}|Weitere kürzlich Verstorbene]]&nbsp;· [[n:Hauptseite|Wikinews]]
+</div>
+</div>
+</div>
+</div>
+<div id="wikipedia-hauptseite-rechts">
+<div class="wikipedia-hauptseite-kasten wikipedia-hauptseite-meta">
+== [[Datei:W-circle.svg|alt=|link=|38px]] Über Wikipedia ==
+<div class="wikipedia-hauptseite-inhalt">
+[[Wikipedia:Über Wikipedia|Wikipedia]] ist ein Projekt zum Aufbau einer Enzyklopädie aus [[Freie Inhalte|freien Inhalten]] in über 280&nbsp;Sprachen, zu dem [[Hilfe:Neu bei Wikipedia|du mit deinem Wissen beitragen kannst]]. Seit Mai 2001 sind [[Wikipedia:Statistik|{{ARTIKELANZAHL}}]]&nbsp;Artikel in deutscher Sprache entstanden.
+
+Bei Fragen aller Art hilft eine unserer verschiedenen [[Wikipedia:Kontakt|Kontaktmöglichkeiten]] weiter, Antworten auf häufig gestellte Fragen liefern die [[Wikipedia:FAQ|FAQ]]. Informationen für Pressevertreter haben wir unter [[Wikipedia:Presse]] zusammengestellt.
+</div>
+</div>
+<div class="wikipedia-hauptseite-kasten wikipedia-hauptseite-meta">
+== [[Datei:HS exclamation.svg|alt=|link=|38px]] Wikipedia aktuell ==
+<div class="wikipedia-hauptseite-inhalt">
+Inhalt von <nowiki>{{Wikipedia:Hauptseite/Wikipedia aktuell}}</nowiki>
+</div>
+</div>
+<div class="wikipedia-hauptseite-kasten wikipedia-hauptseite-meta">
+== [[Datei:HSBook.svg|alt=|link=|38px]] Lesen! ==
+<div class="wikipedia-hauptseite-inhalt">
+Du suchst nach Informationen zu einem bestimmten Thema? Neben der [[Spezial:Suche|Suchfunktion]] kannst du auch unsere [[Portal:Wikipedia nach Themen|Themenportale]] oder das [[:Kategorie:!Hauptkategorie|Kategoriesystem]] nutzen. Alle Artikel findest du im [[Spezial:Alle Seiten|alphabetischem Index]]. Falls du nicht fündig wirst, lohnt sich auch ein Blick bei den [[Wikipedia:Sprachen|anderen Sprachen]]. Und wenn du nicht selbst lesen willst, kannst du dir viele Artikel auch [[Portal:Gesprochene Wikipedia|vorlesen lassen]]. Ebenfalls interessant für dich könnte unsere [[Wikipedia:Tour|Tour für Leser]] sein.
+</div>
+</div>
+<div class="wikipedia-hauptseite-kasten wikipedia-hauptseite-meta">
+== [[Datei:Text-x-generic with pencil-2.svg|alt=|link=|38px]] Mitmachen! ==
+<div class="wikipedia-hauptseite-inhalt">
+Du hast Lust bekommen an Wikipedia mitzuwirken? Nützliche Informationen zum Einstieg findest du auf der Hilfeseite „[[Hilfe:Neu bei Wikipedia|Neu bei Wikipedia]]“ und im [[Wikipedia:Tutorial]]. Im [[Wikipedia:Mentorenprogramm|Mentorenprogramm]] erhälst du durch einen erfahrenen Wikipedianer persönliche Betreuung bei deinen ersten Schritten. Das [[Wikipedia:Autorenportal|Autorenportal]] hält interessante Informationen für Autoren bereit.
+</div>
+</div>
+<div id="hauptseite-wissenswertes" class="wikipedia-hauptseite-kasten">
+== [[Datei:PL Wiki CzyWiesz ikona.svg|alt=|link=|38px]] Schon gewusst? ==
+<div id="mf-dyk" class="wikipedia-hauptseite-inhalt" title="Schon gewusst?">
+{{Wikipedia:Hauptseite/Schon gewusst/{{LOCALDAYNAME}}}}
+<div class="wikipedia-hauptseite-fusszeile">
+[[Spezial:Neue Seiten|Weitere neue Artikel]]&nbsp;· [[Wikipedia:Hauptseite/Schon gewusst/Archiv|Frühere Schon-gewusst-Artikel]]
+</div>
+</div>
+</div>
+</div>
+<div id="wikipedia-hauptseite-unten">
+<div id="hauptseite-schwesterprojekte" class="wikipedia-hauptseite-kasten wikipedia-hauptseite-zentriert">
+== Schwesterprojekte ==
+<div class="wikipedia-hauptseite-inhalt">
+* [[Datei:Wikimedia Community Logo.svg|20px|link={{fullurl:m:Hauptseite|uselang={{INT:Lang}}}}|Meta-Wiki|alt=]] [{{fullurl:m:Hauptseite|uselang={{INT:Lang}}}} Meat-Wiki] – Koordination
+* [[Datei:Commons-logo.svg|18px|link={{fullurl:commons:Hauptseite|uselang={{INT:Lang}}}}|Commons|alt=]] [{{fullurl:commons:Hauptseite|uselang={{INT:Lang}}}} Commons] – Medien
+* [[Datei:Wiktionary small.svg|20px|link=wikt:Wiktionary:Hauptseite|Wiktionary|alt=]] [[wikt:Wiktionary:Hauptseite|Wiktionary]] – Wörterbuch
+* [[Datei:Wikibooks-logo.svg|21px|link=b:Hauptseite|Wikibooks|alt=]] [[b:Hauptseite|Wikibooks]] – Lehrbücher
+* [[Datei:Wikiquote-logo.svg|20px|link=q:Hauptseite|Wikiquote|alt=]] [[q:Hauptseite|Wikiquote]] – Zitate
+* [[Datei:Wikiversity-logo.svg|20px|link=v:Hauptseite|Wikiversity|alt=]] [[v:Hauptseite|Wikiversity]] – Lernplattform
+* [[Datei:Wikisource-logo.svg|20px|link=s:Hauptseite|Wikisource|alt=]] [[s:Hauptseite|Wikisource]] – Quellen
+* [[Datei:Wikinews-logo.svg|26px|link=n:Hauptseite|Wikinews|alt=]] [[n:Hauptseite|Wikinews]] – Nachrichten
+* [[Datei:Wikidata-logo-en.svg|20px|link={{fullurl:d:Wikidata:Hauptseite|uselang={{INT:Lang}}}}|Wikidata|alt=]] [{{fullurl:d:Wikidata:Hauptseite|uselang={{INT:Lang}}}} Wikidata] – Wissensdatenbank
+* [[Datei:Wikivoyage-logo.svg|20px|link=voy:Hauptseite|Wikivoyage|alt=]] [[voy:Hauptseite|Wikivoyage]] – Reiseführer
+</div>
+</div>
+<small>Dateibeschreibungsseiten der verwendeten Symbole und Logos einschließlich Nennung von Lizenz und Urheber: [[:Datei:Wikipedia-logo-v2-200px-transparent.png|Logo im Hintergrund]]; [[:Datei:HSUtvald.svg|Stern]], [[:Datei:HSDagensdatum.svg|Kalender]], [[:Datei:PL Wiki Aktualnosci ikona.svg|Zeitung]], [[:Datei:W-circle.svg|W]], [[:Datei:HS exclamation.svg|Ausrufezeichen]], [[:Datei:HSBook.svg|Bücher]], [[:Datei:Text-x-generic with pencil-2.svg|Stift]], [[:Datei:PL Wiki CzyWiesz ikona.svg|Fragezeichen]]; [[:Datei:Wikimedia Community Logo.svg|Meta-Wiki]], [[:Datei:Commons-logo.svg|Commons]], [[:Datei:Wiktionary small.svg|Wiktionary]], [[:Datei:Wikibooks-logo.svg|Wikibooks]], [[:Datei:Wikiquote-logo.svg|Wikiquote]], [[:Datei:Wikiversity-logo.svg|Wikiversity]], [[:Datei:Wikisource-logo.svg|Wikisource]], [[:Datei:Wikinews-logo.svg|Wikinews]], [[:Datei:Wikidata-logo-en.svg|Wikidata]], [[:Datei:Wikivoyage-logo.svg|Wikivoyage]]</small>
+</div>
+<!--[[Kategorie:Wikipedia:Hauptseite| ]]
+{{Wikipedia:Hauptseite/Interwikis}}-->
+__NOEDITSECTION____NOTOC__
