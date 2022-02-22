@@ -1,0 +1,224 @@
+<!-- Licensed under a BSD license. See license.html for license -->
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>WebGL - 3D Directional Lighting (worldInverseTranspose)</title>
+<link type="text/css" href="webgl-ui/webgl-tutorials.css" rel="stylesheet">
+</head>
+<body>
+<div class="description">
+Drag slider to rotate F.
+</div>
+<canvas id="canvas" width="398" height="298"></canvas>
+<div id="uiContainer">
+  <div id="ui">
+    <div id="fRotation">
+      <div class="gman-widget-outer">
+        <div class="gman-widget-label">fRotation</div>
+        <div class="gman-widget-value">0</div>
+        <input class="gman-widget-slider" type="range" min="-360" max="360" value="0">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+for most samples webgl-utils only provides shader compiling/linking and
+canvas resizing because why clutter the examples with code that's the same in every sample.
+See http://webglfundamentals.org/webgl/lessons/webgl-boilerplate.html
+and http://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
+for webgl-utils, m3, m4, and webgl-lessons-ui.
+-->
+<script src="../simple-webgl.js"></script>
+<script src="webgl-ui/webgl-lessons-ui.js"></script>
+<script>
+"use strict";
+var fRotationRadians = 0,
+	f, renderer, model;
+
+function radToDeg(r) {
+	return r * 180 / Math.PI;
+}
+
+function degToRad(d) {
+	return d * Math.PI / 180;
+}
+
+function updateRotation(event, ui) {
+	fRotationRadians = degToRad(ui.value);
+	drawScene();
+}
+
+f = [
+	// left column front
+	0, 0, 0,
+	0, 150, 0,
+	30, 0, 0,
+	0, 150, 0,
+	30, 150, 0,
+	30, 0, 0,
+
+	// top rung front
+	30, 0, 0,
+	30, 30, 0,
+	100, 0, 0,
+	30, 30, 0,
+	100, 30, 0,
+	100, 0, 0,
+
+	// middle rung front
+	30, 60, 0,
+	30, 90, 0,
+	67, 60, 0,
+	30, 90, 0,
+	67, 90, 0,
+	67, 60, 0,
+
+	// left column back
+	0, 0, 30,
+	30, 0, 30,
+	0, 150, 30,
+	0, 150, 30,
+	30, 0, 30,
+	30, 150, 30,
+
+	// top rung back
+	30, 0, 30,
+	100, 0, 30,
+	30, 30, 30,
+	30, 30, 30,
+	100, 0, 30,
+	100, 30, 30,
+
+	// middle rung back
+	30, 60, 30,
+	67, 60, 30,
+	30, 90, 30,
+	30, 90, 30,
+	67, 60, 30,
+	67, 90, 30,
+
+	// top
+	0, 0, 0,
+	100, 0, 0,
+	100, 0, 30,
+	0, 0, 0,
+	100, 0, 30,
+	0, 0, 30,
+
+	// top rung right
+	100, 0, 0,
+	100, 30, 0,
+	100, 30, 30,
+	100, 0, 0,
+	100, 30, 30,
+	100, 0, 30,
+
+	// under top rung
+	30, 30, 0,
+	30, 30, 30,
+	100, 30, 30,
+	30, 30, 0,
+	100, 30, 30,
+	100, 30, 0,
+
+	// between top rung and middle
+	30, 30, 0,
+	30, 60, 30,
+	30, 30, 30,
+	30, 30, 0,
+	30, 60, 0,
+	30, 60, 30,
+
+	// top of middle rung
+	30, 60, 0,
+	67, 60, 30,
+	30, 60, 30,
+	30, 60, 0,
+	67, 60, 0,
+	67, 60, 30,
+
+	// right of middle rung
+	67, 60, 0,
+	67, 90, 30,
+	67, 60, 30,
+	67, 60, 0,
+	67, 90, 0,
+	67, 90, 30,
+
+	// bottom of middle rung.
+	30, 90, 0,
+	30, 90, 30,
+	67, 90, 30,
+	30, 90, 0,
+	67, 90, 30,
+	67, 90, 0,
+
+	// right of bottom
+	30, 90, 0,
+	30, 150, 30,
+	30, 90, 30,
+	30, 90, 0,
+	30, 150, 0,
+	30, 150, 30,
+
+	// bottom
+	0, 150, 0,
+	0, 150, 30,
+	30, 150, 30,
+	0, 150, 0,
+	30, 150, 30,
+	30, 150, 0,
+
+	// left side
+	0, 0, 0,
+	0, 0, 30,
+	0, 150, 30,
+	0, 0, 0,
+	0, 150, 30,
+	0, 150, 0
+];
+
+function init () {
+	renderer = new SimpleRenderer(
+		SimpleRenderer.initContext(document.getElementById('canvas'), [1, 1, 1]),
+		{directionalLight: true}
+	);
+	renderer.setProjectionData([degToRad(60), 1, 2000]);
+
+	renderer.setAmbientLight([0, 0, 0]);
+	renderer.setDirectionalLight([1, 1, 1]);
+	renderer.setDirectionalDir([0.5, 0.7, 1]);
+	renderer.setViewMatrix(SimpleRenderer.matrix.inverse(SimpleRenderer.matrix.lookAt([100, 150, 200], [0, 35, 0])));
+
+	model = renderer.createModel();
+	model.addRaw(
+		f, {
+			color: [0.2, 1, 0.2]
+		},
+		SimpleRenderer.matrix.multiply(
+			SimpleRenderer.matrix.rotateX(Math.PI),
+			SimpleRenderer.matrix.translate(-50, -75, -15)
+		)
+	);
+}
+
+function run () {
+	webglLessonsUI.setupSlider('#fRotation', {value: radToDeg(fRotationRadians), slide: updateRotation, min: -360, max: 360});
+	drawScene();
+}
+
+
+function drawScene () {
+	model.setMatrix(SimpleRenderer.matrix.rotateY(fRotationRadians));
+	renderer.render(model);
+}
+
+init();
+run();
+</script>
+</body></html>

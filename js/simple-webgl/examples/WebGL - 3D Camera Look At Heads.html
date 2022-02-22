@@ -1,0 +1,118 @@
+<!-- Licensed under a BSD license. See license.html for license -->
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>WebGL - 3D Camera Look At Heads</title>
+<link type="text/css" href="webgl-ui/webgl-tutorials.css" rel="stylesheet">
+</head>
+<body>
+<div class="description">
+Drag slider to move camera.
+</div>
+<canvas id="canvas" width="398" height="298"></canvas>
+<div id="uiContainer">
+  <div id="ui">
+    <div id="targetAngle">
+      <div class="gman-widget-outer">
+        <div class="gman-widget-label">targetAngle</div>
+        <div class="gman-widget-value">0</div>
+        <input class="gman-widget-slider" type="range" min="-360" max="360" value="0">
+      </div>
+    </div>
+    <div id="targetHeight">
+      <div class="gman-widget-outer">
+        <div class="gman-widget-label">targetHeight</div>
+        <div class="gman-widget-value">200</div>
+        <input class="gman-widget-slider" type="range" min="50" max="300" value="200">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../simple-webgl.js"></script>
+<script src="webgl-ui/webgl-lessons-ui.js"></script>
+<script src="headdata.js"></script>
+<script>
+var target = [0, 200, 300],
+	targetAngleRadians = 0,
+	targetRadius = 300,
+	cameraTarget = [0, -100, 0],
+	cameraPosition = [500, 300, 500],
+	renderer, model;
+
+function radToDeg (r) {
+	return r * 180 / Math.PI;
+}
+
+function degToRad (d) {
+	return d * Math.PI / 180;
+}
+
+function updateTargetAngle (event, ui) {
+	targetAngleRadians = degToRad(ui.value);
+	target[0] = Math.sin(targetAngleRadians) * targetRadius;
+	target[2] = Math.cos(targetAngleRadians) * targetRadius;
+	drawScene();
+}
+
+function updateTargetHeight (event, ui) {
+	target[1] = ui.value;
+	drawScene();
+}
+
+function init() {
+	renderer = new SimpleRenderer(SimpleRenderer.initContext(document.getElementById('canvas'), [1, 1, 1]));
+	renderer.setProjectionData([degToRad(60), 1, 3000]);
+
+	model = renderer.createModel();
+	model.addRaw(
+		HeadData.positions, {
+			color: HeadData.normals.map(function (n) {
+				return n / 2 + 0.5;
+			})
+		},
+		SimpleRenderer.matrix.multiply(
+			SimpleRenderer.matrix.scale(6, 6, 6),
+			SimpleRenderer.matrix.rotateY(Math.PI)
+		)
+	);
+}
+
+function run () {
+	webglLessonsUI.setupSlider('#targetAngle', {value: radToDeg(targetAngleRadians), slide: updateTargetAngle, min: -360, max: 360});
+	webglLessonsUI.setupSlider('#targetHeight', {value: target[1], slide: updateTargetHeight, min: 50, max: 300});
+
+	drawScene();
+}
+
+function drawScene () {
+	var deep = 5, across = 5, xx, zz, x, z, v, u;
+
+	renderer.setViewMatrix(
+		SimpleRenderer.matrix.inverse(
+			SimpleRenderer.matrix.lookAt(cameraPosition, cameraTarget)
+		)
+	);
+
+	model.setMatrix(SimpleRenderer.matrix.translate(target[0], target[1], target[2]));
+	renderer.render(model);
+
+	for (zz = 0; zz < deep; zz++) {
+		v = zz / (deep - 1);
+		z = (v - 0.5) * deep * 150;
+		for (xx = 0; xx < across; xx++) {
+			u = xx / (across - 1);
+			x = (u - 0.5) * across * 150;
+			model.setMatrix(SimpleRenderer.matrix.lookAt([x, 0, z], target));
+			renderer.render(model, true);
+		}
+	}
+}
+
+init();
+run();
+</script>
+</body></html>

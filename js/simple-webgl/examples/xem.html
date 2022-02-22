@@ -1,0 +1,73 @@
+<html><head>
+<meta charset="utf-8">
+</head><body><canvas id="canvas" width="400" height="400"></canvas>
+<br>
+<button id="arm-button">Rotate arm</button>
+<button id="hand-button">Rotate hand</button>
+<script src="../simple-webgl.js"></script>
+<script>
+
+// Convert deg in radians
+deg2rad = angle => Math.PI * angle / 180;
+
+var renderer = new SimpleRenderer(SimpleRenderer.initContext(canvas), {pointLight: true}),
+	shoulder = renderer.createModel(), arm = shoulder.createSubModel(), hand = arm.createSubModel([0, -5, 0]);
+
+renderer.setProjectionData([deg2rad(2 * 30), 1, 100]);
+renderer.setViewMatrix(SimpleRenderer.matrix.translate(0, 0, -15));
+renderer.setAmbientLight([0.4, 0.4, 0.4]);
+renderer.setPointLight([1, 1, 1]);
+renderer.setPointPos([2.5, 2.5, 2.5]);
+
+shoulder.addCube({color: [1, 0, 0]}, SimpleRenderer.matrix.multiply( //box 4x2x2; x=-5...-1, y=-1...1, z=-1...1
+	SimpleRenderer.matrix.translate(-3, 0, 0),
+	SimpleRenderer.matrix.scale(2, 1, 1)
+));
+arm.addCube({color: [1, 0, 0]}, SimpleRenderer.matrix.multiply( //box 2x6x2; x=-1...1, y=-5...1, z=-1...1
+	SimpleRenderer.matrix.translate(0, -2, 0),
+	SimpleRenderer.matrix.scale(1, 3, 1)
+));
+hand.addCube({color: [1, 0, 0]}, SimpleRenderer.matrix.scale(2, 0.1, 2)); //box 4x0.2x4; origin at (0, -5, 0); x=-2...2, y=-0.1...0.1, z=-2...2
+
+// Click the buttons to update the arm/hand angles
+var ANGLE_STEP = deg2rad(3);
+var armAngle = deg2rad(180);
+var handAngle = deg2rad(45);
+
+var armClicked = 0, armButton = document.getElementById('arm-button');
+
+armButton.onmousedown = () => {
+  armClicked = 1;
+}
+
+armButton.onmouseup = () => {
+  armClicked = 0;
+}
+
+var handClicked = 0, handButton = document.getElementById('hand-button');
+
+handButton.onmousedown = () => {
+  handClicked = 1;
+}
+
+handButton.onmouseup = () => {
+  handClicked = 0;
+}
+
+// Draw the complete arm
+drawArm = () => {
+  arm.setMatrix(SimpleRenderer.matrix.rotateX(armAngle));
+  hand.setMatrix(SimpleRenderer.matrix.rotateY(handAngle));
+
+  renderer.render(shoulder);
+  renderer.render(arm, true);
+  renderer.render(hand, true);
+}
+
+// Update the angles and redraw the arm at each frame
+setInterval(() => {
+  if(armClicked){ armAngle += ANGLE_STEP; }
+  if(handClicked){ handAngle += ANGLE_STEP; }
+  drawArm();
+}, 33);
+</script></body></html>
