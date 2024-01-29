@@ -1,0 +1,37 @@
+ClrHome
+Disp "Immer eine"
+Disp "Muenze nehmen."
+Disp "Der Letzte"
+Disp "behaelt seine."
+Disp " "
+Output(5, 1, lSPIEL(3))
+Output(5, 8, ":")
+Output(5, 9, lSPIEL(4))
+lSPIEL(1)→E
+lSPIEL(2)→C
+0→N:0→M
+While 1
+Disp N
+Input "Weiter (1)?", A
+If A≠1:Goto EE
+N+1→N
+If N≥E-0.5+2*randNorm(0, 1)
+Goto XX
+M+1→M
+End
+Lbl EE
+Disp "Gewonnen"
+Disp N
+E*C/(C+1)+N/(C+1)→E
+C+1→C
+N+lSPIEL(3)→lSPIEL(3)
+Goto ZZ
+Lbl XX
+Disp "Verloren"
+Disp M
+E*C/(C+1)+(M+1)/(C+1)→E
+C+1→C
+M+lSPIEL(4)→lSPIEL(4)
+Lbl ZZ
+E→lSPIEL(1)
+C→lSPIEL(2)

@@ -1,0 +1,24 @@
+Input "Exponent: ", A
+Input "Modul: ", B
+0→dim(L1):B→dim(L1)
+For(I, 0, B-1)
+I^A→C
+fPart(C/B)*B→L1(I+1)
+End
+round(L1, 0)→L1
+SortA(L1)
+-1→A:0→C
+For(I, 1, B)
+If A=L1(I):Then
+B→L1(I):1+C→C
+End
+L1(I)→A
+End
+End
+SortA(L1)
+B-C→dim(L1)
+If dim(L1)≤7:Then
+Disp L1
+Else
+Pause L1
+End

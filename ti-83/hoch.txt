@@ -1,0 +1,20 @@
+If 0:A^B(c)→A
+1→dim(L1)
+B→L1(1)
+While B≠0
+(B/2-int(B/2))*2→L1(dim(L1)+1)
+int(B/2)→B
+End
+A-int(A/C)*C→A
+A→D
+For(I, dim(L1)-1, 2, -1)
+D²→D
+D-int(D/C)*C→D
+If L1(I)=1
+Then
+AD→D
+D-int(D/C)*C→D
+End
+End
+L1(1)→B
+D→A

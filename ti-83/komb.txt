@@ -1,0 +1,40 @@
+0→A
+Menu("Kombinatorik", "M. Zuruecklegen", MZ, "O. Zuruecklegen", OZ)
+Lbl MZ
+2→A
+Lbl OZ
+Menu("Kombinatorik", "M. Anordnung", MA, "O. Anordnung", OA)
+Lbl MA
+A+1→A
+Lbl OA
+Input "El. insges.: ", N
+Input "El. gewaehlt: ", K
+ClrHome
+If A=3:Then
+Disp "Variation"
+Output(2, 1, N)
+Output(2, 2, "^  =")
+Output(2, 3, K)
+Output(2, 7, N^K)
+End
+If A=2:Then
+Disp "Kombination"
+Output(2, 1, "(  +  -1)=")
+Output(2, 2, N):Output(2, 5, K)
+Output(3, 5, K)
+Output(2, 11, (N+K-1) nCr K)
+End
+If A=1:Then
+Disp "Variation"
+Disp "     !  ="
+Disp "(  -  )!
+Output(2, 4, N):Output(3, 2, N)
+Output(3, 5, K)
+Output(2, 10, N nPr K)
+End
+If A=0:Then
+Disp "Kombination"
+Output(2, 1, "(  )="
+Output(2, 2, N):Output(3, 2, K)
+Output(2, 6, N nCr K)
+End

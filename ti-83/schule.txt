@@ -1,0 +1,93 @@
+Lbl MM
+Menu("Bereiche", "Sprachen, ...", SS, "Gesellsch.", GG, "Nat.-Wiss.", NN, "Sport", FS, "", MM, "Ende", XX)
+Lbl SS
+Menu("Sprachen, ...", "Deutsch", FD, "Latein", FL, "BK", FB)
+Lbl GG
+Menu("Gesellschaftsw.", "Geschichte", FG, "Erdkunde/GK", FE, "Religion", FR)
+Lbl NN
+Menu("Naturwissensch.", "Mathematik", FM, "Physik", FP, "Chemie", FC, "Informatik", FI)
+Lbl FS
+0→A:"Sport"→Str5
+Goto EE
+Lbl FD
+1→A:"Deutsch"→Str5
+Goto EE
+Lbl FL
+2→A:"Latein"→Str5
+Goto EE
+Lbl FB
+3→A:"BK"→Str5
+Goto EE
+Lbl FG
+4→A:"Geschichte"→Str5
+Goto EE
+Lbl FE
+5→A:"Erdkunde/GK"→Str5
+Goto EE
+Lbl FR
+6→A:"Religion"→Str5
+Goto EE
+Lbl FM
+7→A:"Mathematik"→Str5
+Goto EE
+Lbl FP
+8→A:"Physik"→Str5
+Goto EE
+Lbl FC
+9→A:"Chemie"→Str5
+Goto EE
+Lbl FI
+10→A:"Informatik"→Str5
+Lbl EE
+Menu(Str5, "Anzeigen", MA, "Eingeben", ME, "Note", MN, "", EE, "Ende", MM)
+Lbl MA
+Pause sub(Str6, 32*A+2, 32)
+Goto EE
+Lbl ME
+Input Str5
+sub(Str6, 1, 32*A+1)+sub(Str5+"                                ", 1, 32)+sub(Str6, 32*A+34, 321-32*A)→Str6
+Goto MM
+Lbl MN
+Menu(Str5+": Noten", "Anzeigen", NA, "Eingabe", NE, "", MN, "Ende", EE)
+Lbl NA
+0→B:0→C
+lN121(A+1)→D
+If D≠-1:Then
+Disp "12.1: ", D
+B+D→B:1+C→C
+End
+lN122(A+1)→D
+If D≠-1:Then
+Disp "12.2: ", D
+B+D→B:1+C→C
+End
+lN131(A+1)→D
+If D≠-1:Then
+Disp "13.1: ", D
+B+D→B:1+C→C
+End
+lN132(A+1)→D
+If D≠-1:Then
+Disp "13.2: ", D
+B+D→B:1+C→C
+End
+If C≠0
+Disp "Schnitt: ", B/C
+Pause
+Goto MN
+Lbl NE
+Disp Str5
+Input "12.1: ", D
+If D≠-1
+D→lN121(A+1)
+Input "12.2: ", D
+If D≠-1
+D→lN122(A+1)
+Input "13.1: ", D
+If D≠-1
+D→lN131(A+1)
+Input "13.2: ", D
+If D≠-1
+D→lN132(A+1)
+Goto MN
+Lbl XX

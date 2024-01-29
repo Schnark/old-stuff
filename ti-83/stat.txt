@@ -1,0 +1,178 @@
+FnOff
+0→A
+0→B
+0→C
+Lbl XX
+Menu("Statistik", "Eingabe", EE, "Eingabe X", FF, "Auswerten", AA, "Grafik", GG, "Regression", RR, "Berechnen", BB, "Ende", ZZ)
+Lbl EE
+Input L2
+seq(X, X, 1, dim(L2))→L1
+0→A
+0→C
+FnOff 1
+Goto XX
+Lbl FF
+Input L1
+0→A
+1→C
+FnOff 1
+Goto XX
+Lbl AA
+1-VarStats L2
+ClrHome
+Disp "x̄="
+Disp "σx="
+Disp "minX="
+Disp "Q1="
+Disp "Med="
+Disp "Q3="
+Disp "maxX="
+Output(8, 1, "n=")
+Output(1, 6, x̄)
+Output(2, 6, σx)
+Output(3, 6, minX)
+Output(4, 6, Q1)
+Output(5, 6, Med)
+Output(6, 6, Q3)
+Output(7, 6, maxX)
+Output(8, 6, n)
+Pause
+ClrHome
+Goto XX
+Lbl GG
+0→A
+Menu("Grafik", "Scatter", SC, "xyLine", XY, "Histogram", HI, "ModBoxplot", MO, "Boxplot", BO)
+Lbl SC
+Plot1(Scatter, L1, L2, 0)
+1→A
+Goto WE
+Lbl XY
+Plot1(xyLine, L1, L2, 0)
+1→A
+Goto WE
+Lbl HI
+Plot1(Histogram, L2, 1)
+Goto WE
+Lbl MO
+Plot1(ModBoxplot, L2, 1, 0)
+Goto WE
+Lbl BO
+Plot1(Boxplot, L2, 1)
+Lbl WE
+If A=0
+FnOff 1
+ZoomStat
+Trace
+Goto XX
+Lbl RR
+If A=0:Goto XX
+Menu("Regression", "LinReg(ax+b)", LI, "QuadReg", QA, "CubicReg", CU, "QuartReg", QB, "LnReg", LN, "ExpReg", EX, "Weitere", WF)
+Lbl WF
+Menu("Regression", "PwrReg", PW, "Logistic", LO, "SinReg", SI, "Med-Med", ME, "Weitere", RR, "Gleichung", GE)
+Lbl LI
+LinReg(ax+b) L1, L2, Y1
+1→B
+Goto WG
+Lbl QA
+QuadReg L1, L2, Y1
+2→B
+Goto WG
+Lbl CU
+CubicReg L1, L2, Y1
+3→B
+Goto WG
+Lbl QB
+QuartReg L1, L2, Y1
+4→B
+Goto WG
+Lbl LN
+LnReg L1, L2, Y1
+5→B
+Goto WG
+Lbl EX
+ExpReg L1, L2, Y1
+6→B
+Goto WG
+Lbl PW
+PwrReg L1, L2, Y1
+7→B
+Goto WG
+Lbl LO
+Logistic L1, L2, Y1
+8→B
+Goto WG
+Lbl SI
+SinReg L1, L2, Y1
+9→B
+Goto WG
+Lbl ME
+Med-Med L1, L2, Y1
+10→B
+Lbl WG
+Trace
+Goto XX
+Lbl GL
+If B=0
+Goto XX
+ClrHome
+If B=1
+Disp "aX+b"
+If B=2
+Disp "aX²+bX+c"
+If B=3
+Disp "aX³+bX²+cX+d"
+If B=4
+Disp "aX^4+...+dX+e"
+If B=5
+Disp "a+bln(X)"
+If B=6
+Disp "a*b^X"
+If B=7
+Disp "a*X^b"
+If B=8
+Disp "c/(1+a*e^(-bX))"
+If B=9
+Disp "a*sin(bX+c)+d"
+If B=10
+Disp "aX+b (Med)"
+Disp "a="
+Disp "b="
+Output(2, 4, a)
+Output(3, 4, b)
+If ((B≠10) and (B>7)) or ((B<5) and (B≠1))
+Then
+Output(4, 1, "c=")
+Output(4, 4, c)
+If (B=2) or (B=8)
+Then
+Else
+Output(5, 1, "d=")
+Output(5, 4, d)
+End
+End
+If B=4
+Then
+Output(6, 1, "e=")
+Output(6, 4, e)
+End
+If (B=1) or ((B>4) and (B<8))
+Then
+Output(7, 1, "r=")
+Output(8, 1, "r²=")
+Output(7, 4, r)
+Output(8, 4, r²)
+Else
+If B<5
+Then
+Output(7, 1, "R²=")
+Output(7, 4, R²)
+End
+End
+Pause
+ClrHome
+Goto XX
+Lbl BB
+Input Str1
+Pause expr(Str1)
+Goto XX
+Lbl ZZ

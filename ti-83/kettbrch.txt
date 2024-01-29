@@ -1,0 +1,99 @@
+Menu("Kettenbruch", "→Frac", FF, "→Dec", DD, "→Frac (Reel)", RR, "→Frac (√()), WW, "Periodisch", PP)
+Lbl FF
+Input "Zaehler: ", Z
+Input "Nenner: ", N
+{Int(Z/N)}→L1
+Z-N*int(Z/N)→Z
+Z→H:N→Z:H→N
+While N≠0
+augment(L1, {int(Z/N)})→L1
+Z-N*int(Z/N)→Z
+Z→H:N→Z:H→N
+End
+Pause L1
+Goto EE
+Lbl DD
+Input "Kettenbruch: ", L1
+Input "Nr. Naeherung: ", C
+If C>dim L1:Goto EE
+If C=0:dim L1→C
+[[L1(1), 1][1, 0]]→[A]
+For(I, 2, C)
+[A]*[[L1(I), 1][1, 0]]→[A]
+End
+Pause {[A](1,1), [A](2,1), [A](1,1)/[A](2,1)}
+Goto EE
+Lbl RR
+Input "Zahl: ", Z
+abs(Z)→Z
+Input "Max. Laenge: ", N
+{int(Z)}→L1
+If fPart(Z)=0
+Goto BR
+1/fPart(Z)→Z
+For(I, 2, N)
+augment(L1, {int(Z)})→L1
+If fPart(Z)=0:Goto BR
+1/fPart(Z)→Z
+End
+Lbl BR
+Pause L1
+Goto EE
+Lbl WW
+Input "√(?: ", Z
+{int(√(Z))}→L1
+1→A:int(√(Z))→B
+A→C:B→D
+Repeat (A=C) and (B=D)
+int(A(√(Z)+B)/(Z-B²))→I
+(Z-B²)/A→A
+A*I-B→D
+augment(L1, {I})→L1
+End
+Pause L1
+Goto EE
+Lbl PP
+Input "Periodenlaenge: ", L
+Input "Vorperiode + 1 Periode", L1
+dim(L1)→N
+1→B:0→C:0→D:1→E
+For(I, 0, L-1)
+L1(N-I)→A
+AB+D→F
+AC+E→G
+B→D:C→E:F→B:G→C
+End
+B-E→A
+(B-E)²+4DC→B
+2D→C
+If N=L:Goto AB
+For(I, 1, N-L)
+L1(N-L+1-I)*(B-A²)-AC→D:D*C/abs(C)→D
+C²B→E
+B-A²→F:F*C/abs(C)→F
+D→A:E→B:F→C
+gcd(gcd(abs(A), abs(C))², B)→D
+int(√(D))→E
+For(J, 0, E-1)
+If fPart(D/(E-J)²)=0
+Then
+J→K:E-1→J:End
+End
+A/(E-K)→A:B/(E-K)²→B:C/(E-K)→C
+End
+Lbl AB
+gcd(gcd(abs(A), abs(C))², B)→D
+int(√(D))→E
+For(I, 0, E-1)
+If fPart(D/(E-I)²)=0
+Goto AE:End
+Lbl AE
+A/(E-I)→A:B/(E-I)²→B:C/(E-I)→C
+ClrHome
+Output(1, 1, A)
+Output(1, 7, "+√(")
+Output(1, 10, B)
+Output(1, 15, ")/")
+Output(2, 1, C)
+Disp "":Disp ""
+Lbl EE

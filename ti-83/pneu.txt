@@ -1,0 +1,25 @@
+2→A
+1→I
+0→dim(lPRIMS)
+Input(B)
+While B>1 and √(B)≥A
+Output(8, 1, A)
+While fPart(B/A)=0
+B/A→A
+Disp A
+A→lPRIMS(I)
+I+1→I
+End
+A+2→A
+If A=4:A-1→A
+End
+If B≠1
+Then
+Disp B
+B→lPRIMS(I)
+I+1→I
+End
+If I=1
+1→lPRIMS(I)
+Output(8, 1, "       ")
+Pause lPRIMS

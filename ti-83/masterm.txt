@@ -1,0 +1,62 @@
+4→dim(L1):4→dim(L2):4→dim(L3)
+AxesOff:Full
+FnOff:PlotsOff
+Disp "  Mastermind  "
+Disp "Farben: 1-9"
+Disp "Antwort:"
+Disp "Richtige Stelle,"
+Disp "richtige Farbe"
+Disp "     (C) 2003"
+Disp "Michael Mueller"
+Pause
+ClrHome
+Repeat A≤9
+Input "Farben: ", A
+End
+Repeat B≤24
+Input "Versuche: ", B
+End
+randInt(1, A, 4)→L1
+ClrHome
+ClrDraw
+For(C, 1, B)
+Input A
+For(D, 0, 3)
+fPart(int(A(10^(D))/10))*10→L2(4-D)
+End
+(L1=L2)→L3
+max(cumSum(L3))→R
+(1-(L3))*L2→L2
+(1-(L3))*L1→L3
+SortA(L2):SortA(L3)
+0→S
+For(I, 1, 4)
+For(J, 1, 4)
+If L2(I)≠0 and L2(I)=L3(J)
+Then
+S+1→S:0→L2(I):0→L3(J)
+End
+End
+End
+64*fPart((C-1)/8)→I
+32*int((C-1)/8)→J
+Text(I, J, A)
+Text(I, J+18, R)
+Text(I, J+22, S)
+Pause
+If R=4
+Goto E1
+End
+Goto
+E2
+Lbl E1
+ClrHome
+Output(4, 5, "Richtig!")
+Goto E
+Lbl E2
+ClrHome
+Output(4, 6, "Falsch")
+Output(5, 7, 1000*L1(1)+100*L1(2)+10*L1(3)+L1(4))
+Lbl E
+0→dim(L1):0→dim(L2):0→dim(L3)
+Pause

@@ -1,0 +1,17 @@
+Input "Note: ", N
+Menu("Noten", "→ Punkte 15 P.", P1, "→ Note  =1+", N1, "→ Punkte 15 P.", P2, "→ Note  =1", N2, "Bereich", BB)
+Lbl P1
+Disp 120/7-N*20/7
+Goto EE
+Lbl P2
+Disp 18-3N
+Goto EE
+Lbl N1
+Disp 6-7*N/20
+Goto EE
+Lbl N2
+Disp 6-N/3
+Goto EE
+Lbl BB
+Disp 6-int((int(.5+N)+2)/3)
+Lbl EE

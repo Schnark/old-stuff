@@ -1,0 +1,126 @@
+Disp "Heute TTMM.JJ"
+Input D
+ClrHome
+Lbl SS
+Menu("Termine", "Neu", NN, "Anzeige", AA, "Loeschen", LL, "Ende", EE)
+Lbl NN
+Meunu("Art", "Schule", AS, "Mathe", AM, "Sonstiges", AX)
+Lbl AS:0→A:Goto AW
+Lbl AM:1→A:Goto AW
+Lbl AX:2→A:Lbl AW
+dim(lART)+1→dim(lART)
+A→lART(dim(lART))
+Disp "Beschreibung: "
+Input Str3
+dim(lLAENG)+1→dim(lLAENG)
+length(Str3)→lLAENG(dim(lLAENG))
+dim(lPOS)+1→dim(lPOS)
+1+length(Str2)→lPOS(dim(lPOS))
+(Str2+Str3)→Str2
+Disp "Datum TTMM.JJ"
+Input A
+dim(lDATUM)+1→dim(lDATUM)
+A→lDATUM(dim(lDATUM))
+dbd(D, lDATUM)→L1
+SortA(L1, lART, lDATUM, lLAENG, lPOS)
+ClrHome
+Goto SS
+Lbl AA
+Menu("Art", "Schule", BS, "Mathe", BM, "Sonstiges", BX, "Alles", BA)
+Lbl BS:0→A:Goto BW
+Lbl BM:1→A:Goto BW
+Lbl BX:2→A:Goto BW
+Lbl BA:-1→A:Lbl BW
+Disp "Tage (0=Alles)"
+Input B
+ClrHome
+0→J
+For(I, 1, dim(lART))
+If lART(I)=A or A=-1
+Then
+If dbd(D, lDATUM(I))≤B or B=0
+Then
+1+J→J
+lDATUM(I)→C
+int(C/100)→T
+int(C-100T)→M
+Output(1+8fPart((J-1)/4), 1, J)
+Output(1+8fPart((J-1)/4), 4, T)
+Output(1+8fPart((J-1)/4), 6, ". ")
+Output(1+8fPart((J-1)/4), 9, M)
+Output(1+8fPart((J-1)/4), 11, ".")
+If lART(I)=0:"S"→Str3
+If lART(I)=1:"M"→Str3
+If lART(I)=2:"X"→Str3
+Output(1+8fPart((J-1)/4), 16, Str3)
+Output(2+8fPart((J-1)/4), 1, sub(Str2, lPOS(I), lLAENG(I)))
+End
+If int(J/4)=J/4
+Then
+Pause:ClrHome
+End
+End
+End
+If int(J/4)≠J/4
+Pause
+ClrHome
+Goto SS
+Lbl LL
+Disp "Nummer (0=Alles)"
+Input N
+0→J:0→E
+If N=0
+Goto LA
+For(I, 1, dim(lART))
+If lART(I)=A or A=-1
+Then
+If (dbd(D, lDATUM(I))≤B or B=0
+Then
+1+J→J
+If N=J
+I→E
+End
+End
+End
+If E=0
+Then
+Disp "Nicht vorhanden"
+Pause:Goto SS
+End
+Disp sub(Str2, lPOS(E), lLAENG(E))
+Disp "Loeschen? (1)"
+Input A
+If A≠1:Goto SS
+" "→Str3
+For(I, 1, E-1)
+length(Str3)→A
+Str3+sub(Str2, lPOS(I), lLAENG(I))→Str3
+A+1→lPOS(I)
+End
+For(I, E+1, dim(lART))
+length(Str3)→A
+Str3+sub(Str2, lPOS(I), lLAENG(I))→Str3
+A+1→lPOS(I)
+End
+Str3→Str2
+-1→lART(E)
+SortD(lART, lDATUM, lLAENG, lPOS)
+dim(lART)-1→dim(lART)
+dim(lDATUM)-1→dim(lDATUM)
+dim(lLAENG)-1→dim(lLAENG)
+dim(lPOS)-1→dim(lPOS)
+dbd(D, lDATUM)→L1
+SortA(L1, lART, lDATUM, lLAENG, lPOS)
+ClrHome
+Goto SS
+Lbl LA
+Disp "Alles loeschen? (1)"
+Input A
+If A≠1:Goto SS
+" "→Str2
+0→dim(lART)
+0→dim(lDATUM)
+0→dim(lLAENG)
+0→dim(lPOS)
+Goto SS
+Lbl EE

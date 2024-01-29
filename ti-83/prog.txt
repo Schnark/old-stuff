@@ -1,0 +1,18 @@
+Lbl W
+Menu("Spiele", "TBout", TB, "Tetris", T, "Nibbles", N, "Pinball", P, "Mastermind", M, "Ende", E)
+Lbl TB
+prgmTBOUT2
+Goto W
+Lbl T
+prgmTETRIS
+Goto W
+Lbl N
+prgmNIBBLES
+Goto W
+Lbl M
+prgmMASTERM
+Goto W
+Lbl P
+prgmPROGPINB
+Goto W
+Lbl E
