@@ -6,6 +6,7 @@ They are roughly grouped into several folders:
 
 * QBasic: Old code written in QBasic. (starting in 2001, until 2004)
 * Asm: Old code written with `debug.exe` in assembler. (2002)
+* ti-83: Old code written for a TI-83. These are from a backup on paper, and not directly usable (2003 to 2005)
 * Turbo: Old code written in Turbo Pascal 6. Some are ports of QBasic programs. This also includes my participations in the "Bundeswettbewerb Informatik", and some programs written in school. (2004 to 2007)
 * Shell: Some not so really old shell/perl/etc. scripts, most of these have something to do with Wikipedia.
 * JS: Some not so really old or unfinished JS scripts. The subfolder `wp` contains unfinished JS scripts (and some other stuff) written for Wikipedia.
