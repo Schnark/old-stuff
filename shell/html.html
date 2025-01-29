@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf8'>
+	<title>Seitentitel</title>
+
+<style type='text/css'>
+ body { background-color:#555; }
+
+ #titel { 
+	text-align:center;
+	position:fixed;
+	z-index:1;
+	background-color:white;
+	top:0;
+	left:0;
+	font-size:3em;
+	width:100%;
+	white-space:nowrap;
+	}
+
+ #navigation {
+	float:left;
+	list-style:none;
+	width:15em;
+	margin-left:-2em;
+	text-indent:1em;
+	position:fixed;
+	}
+ #unternavigation {
+	list-style:none;
+	margin-left:-2.5em;
+	text-indent:2.5em;
+	position:relative;
+	}
+
+/* menu0: nicht aktuelles Obermenü
+   menu1: aktuelles Obermenü
+   submenu0: nicht aktuelles Untermenü
+   submenu1: aktuelles Untermenü */
+ .menu0 { background-color:#007; }
+ .menu0:hover { background-color:#00f; }
+ .menu1 { background-color:#60c; }
+ .menu1:hover { background-color:#70f; }
+ .submenu0 { background-color:#070; }
+ .submenu0:hover { background-color:#084; }
+ .submenu1 { background-color:#770; }
+ .submenu1:hover { background-color:#880; }
+ #navigation a { color:#ddd; text-decoration:none; display:block; }
+ #navigation a:hover { color:#fff; }
+
+ #inhalt { 
+	margin-top:3em; margin-left:17em; margin-right:-0.5em; margin-bottom:-0.5em;
+	padding-left:2em; padding-right:1em; padding-top:0.1em; padding-bottom:0.1em;
+	display:block; background-color:#fff; text-align:justify; }
+
+#fusszeile {
+	color:#444; font-style:italic;
+	border-width:1px; border-style:solid; border-color:#111; padding:0.2em;
+	text-align:right; }
+</style>
+
+</head>
+<body lang='de-DE' dir='LTR'>
+<!--Titel-->
+<div id='titel'>Text oben – Text oben – Text oben – Text oben</div>
+<!--Navigation Start-->
+<a href='#inhalt' style='display:none;'>Zum Text</a>
+<ul id='navigation'>
+<li class='menu0'><a href='javascript:alert("0");'>Menü-Überschrift 0</a></li>
+<li class='menu1'><a href='javascript:alert("1");'>Menü-Überschrift 1</a></li>
+<ul id='unternavigation'>
+<li class='submenu0'><a href='javascript:alert("1.1");'>Menü-Unterschrift 1</a></li>
+<li class='submenu1'><a href='javascript:alert("1.2");'>Menü-Unterschrift 2</a></li>
+<li class='submenu0'><a href='javascript:alert("1.3");'>Menü-Unterschrift 3</a></li>
+</ul>
+<li class='menu0'><a href='javascript:alert("2");'>Menü-Überschrift 2</a></li>
+<li class='menu0'><a href='javascript:alert("3");'>Menü-Überschrift 3</a></li>
+</ul>
+<!--Navigation Ende-->
+<!--Inhalt-->
+<div id='inhalt'>
+<h1>Viel Text</h1>
+<p>Lorem ipsum dolor sit amet, <a href='javascript:alert("consectetuer");'>consectetuer</a> adipiscing elit. Etiam id erat at tellus tincidunt mollis. Praesent mattis tortor eu est. Donec congue sagittis arcu. Etiam viverra erat ut nulla. Donec hendrerit tortor et metus. Maecenas rhoncus dapibus leo. Donec vel ipsum ut felis vestibulum varius. Mauris ipsum nisl, accumsan eget, gravida non, mattis nec, nunc. Pellentesque pellentesque erat a arcu. Nulla semper, metus ac volutpat congue, ipsum felis mattis felis, sed placerat dolor velit ac urna. Nunc convallis. Donec non ligula nec nunc accumsan consequat. Ut in mauris. Vestibulum vitae neque sed eros convallis molestie. Phasellus quis ligula non tortor mattis mollis. Vestibulum sit amet ipsum ut ligula iaculis tincidunt.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p> Quisque molestie lorem vel risus. Sed volutpat. Sed consectetuer pulvinar turpis. Mauris sagittis, orci ut dictum porta, augue augue cursus leo, ut condimentum diam mi eu leo. Nullam lacinia. Vestibulum in urna nec dui suscipit dignissim. Maecenas odio diam, consequat et, bibendum non, ullamcorper a, risus. Nulla condimentum ligula a wisi. In eget risus quis purus ultricies rutrum. Mauris commodo tortor eu felis.</p>
+<p id='fusszeile'>Ende</p>
+<a href='#navigation' style='display:none;'>Nach oben zur Navigation</a>
+</div>
+</body>
+</html>

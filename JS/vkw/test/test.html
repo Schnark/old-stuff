@@ -1,0 +1,146 @@
+<html><head><script type="text/javascript">
+// -----------------------------------------------------
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2, or (at your option)
+// any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// Sucht nach Verbindungen aus einer langen Kette von Freunden
+// Das Programm verwendet einige Methoden aus den VZ-Tools
+//
+// -----------------------------------------------------
+
+// ==UserScript==
+// @name           VZ: Kleine Welt
+// @namespace      vzisteinekleinewelt
+// @description    sucht nach Verbindungen aus einer Kette von Freunden
+// @version        0.2.42
+// @include        http://*.meinvz.tld/*
+// @include        http://*.studivz.tld/*
+// @include        http://*.schuelervz.tld/*
+// ==/UserScript==
+
+//======== Initialisierungen ============================================
+var profId = 0;
+var debug_message="";
+var stat_profile=0;
+
+var maximum = 5;
+
+var eigenerName="ich";
+
+//======== Hilfsfunktionen ==============================================
+var index;
+var Namen = new Object(); //Namen[Id] liefert Name zu einer Id
+Namen[profId]=eigenerName;
+var Freunde = new Array();
+
+
+holeFreunde = function(vonwem) {
+//speichert alle Freunde im Array Freunde[], gibt deren Anzahl zurück
+index=3;
+Freunde[0]=vonwem-2; if (vonwem-2!=0) Namen[vonwem-2]="Nr. "+String(vonwem-2);
+Freunde[1]=vonwem-1; if (vonwem-1!=0) Namen[vonwem-1]="Nr. "+String(vonwem-1);
+Freunde[2]=vonwem*1+1; if (vonwem+1!=0) Namen[vonwem+1]="Nr. "+String(vonwem+1);
+//Freunde[3]=vonwem*1+2; if (vonwem+2!=0) Namen[vonwem+2]="Nr. "+String(vonwem+2);
+return index;
+}
+
+
+var Kette= new Array();
+findeVerbindung = function(von, nach, max) {
+//sucht Verbindung, gibt Länge der Kette zurück, Kette[0]=nach, Kette[return]=von
+debug_message += "\nStarte Suche von " + von + " zu " + nach + " bis Tiefe " + maximum;
+var erfolg = 0;
+
+if (von == nach) {Kette[0] = von; return 0;}                           //von und nach identisch
+
+var a = new Array(2);                                                  //a[x] (x=0, 1): von vorne und hinten
+a[0] = new Array();                                                    //a[x][k][0]: möglicher Freund, a[x][k][1]: dessen Vorgänger in der Kette
+a[0][0] = new Array(2);
+a[0][0][0] = von; a[0][0][1] = "";                                     //erster Freund, kein Vorgänger
+a[1] = new Array();
+a[1][0] = new Array(2);
+a[1][0][0] = nach; a[1][0][1] = "";                                    //letzter Freund, kein Vorgänger
+
+var treffen;                                                           //wo die Ketten aufeinandertreffen
+
+var s = 0; p = 0;                                                      //Stufe, Richtung
+var k_min = new Array(2); var k_max = new Array(2);                    //k_min: bis zu diesem Index untersucht, k_max: größter Index
+k_min[0] = -1; k_min[1] = -1; k_max[0] = 0; k_max[1] = 0;
+var k_min_ = new Array(2); var k_max_ = new Array(2);                  //jeweils alte Werte
+
+repeat: do {
+    k_min_[p] = k_max[p]; k_max_[p] = k_max[p];                        //alte Werte speichern
+    for (var k = k_min[p] + 1; k <= k_max[p]; k++) {                   //von der kleinsten bis zur größten noch nicht untersuchten Person
+        var anzahl = holeFreunde(a[p][k][0]);                          //Freunde holen
+        forR: for (var i = 0; i < anzahl; i++) {                       //jeden Freund untersuchen
+            var R = Freunde[i];
+            for (var l = 0; l <= k_max_[p]; l++)
+                if (a[p][l][0] == R) continue forR;                    //ob er schon vorkommt
+            k_max_[p]++;                                               //ansonsten hinten anhängen
+            a[p][k_max_[p]] = new Array(2);
+            a[p][k_max_[p]][0] = R; a[p][k_max_[p]][1] = a[p][k][0];   //Vorgänger ist aktuell untersuchter Freund
+            stat_profile++;
+            for (var n = 0; n <= k_max[1 - p]; n++)
+                 if (R == a[1 - p][n][0]) {                            //am Ziel angekommen?
+                    erfolg = 1; treffen = R; break repeat;}
+        }
+    }
+    k_min[p] = k_min_[p]; k_max[p] = k_max_[p]; s++; p = 1 - p;
+} while ((k_min[1 - p] != k_max[1 - p]) && (s <= max));                //weiter bis keine neuen Freunde oder zu viele Iterationen
+
+if (erfolg == 0) return -1;
+
+var Kette0 = new Array();
+var Kette1 = new Array();
+
+Kette0[0] = treffen;
+while (Kette0[Kette0.length - 1] != von) {
+      forj0: for (var j = 0; j <= k_max_[0]; j++)
+             if (a[0][j][0] == Kette0[Kette0.length - 1]) break forj0;
+      Kette0.push(a[0][j][1]); }
+
+Kette1[0] = treffen;
+while (Kette1[Kette1.length - 1] != nach) {
+      forj1: for (var j = 0; j <= k_max_[1]; j++)
+             if (a[1][j][0] == Kette1[Kette1.length - 1]) break forj1;
+      Kette1.push(a[1][j][1]); }
+
+Kette0.reverse().pop();
+Kette = Kette0.concat(Kette1);
+return Kette.length-1;
+
+/*
+Kette[Math.ceil(s/2)] = treffen;                                       //in der Mitte
+for (var i = Math.ceil(s/2) - 1; i >= 0; i--) {                        //Kette nach vorne ...
+    forj1: for (var j = 0; j <= k_max_[1]; j++)
+           if (a[1][j][0] == Kette[i + 1]) break forj1;
+    Kette[i] = a[1][j][1];}
+for (var i = Math.ceil(s/2) + 1; i <= s + 1; i++) {                    //... und hinten fortsetzen
+    forj2: for (var j = 0; j <= k_max_[0]; j++)
+           if (a[0][j][0] == Kette[i - 1]) break forj2;
+    Kette[i] = a[0][j][1];}
+
+return s + 1;*/
+}
+
+testtest = function() {
+var freund=prompt("ID von Freund:",profId);
+var zahl=findeVerbindung(profId,freund,maximum);
+if (zahl==-1) {alert("Keine Verbindung!"); return;}
+Namen[freund]="der andere";
+var antwort="";
+for (var i = 0; i <= zahl; i++) antwort+=i+": "+Namen[Kette[i]]+" ("+Kette[i]+")\n";
+alert(antwort);
+}
+
+window.addEventListener("load", function() {
+  testtest();
+},true);</script></head><body></body></html>

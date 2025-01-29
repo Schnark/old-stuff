@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>Image test</title>
+<meta name="viewport" content="width=device-width">
+<script src="image.js" defer></script>
+<style>
+#output {
+	max-width: 100%;
+	max-height: 20em;
+}
+</style>
+</head><body>
+<canvas id="output"></canvas>
+<p><button id="start-stop">Accumulate</button> <button id="download">Download</button></p>
+<form autocomplete="off"><fieldset id="options">
+<p><label><input id="extract" type="checkbox"> Extract</label></p>
+<p><label><input id="diagonal-c" type="checkbox"> Size</label> <label>Value: <input id="diagonal-v" disabled type="range" min="100" value="1000" max="10000"></label></p>
+<p><label><input id="aspect-c" type="checkbox"> Aspect ratio</label> <label>Value: <input id="aspect-v" disabled type="range" min="-10" value="0" max="10"></label></p>
+<p><label><input id="grayscale" type="checkbox"> Grayscale</label></p>
+</fieldset></form>
+</body></html>

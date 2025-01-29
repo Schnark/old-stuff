@@ -1,0 +1,98 @@
+#!/bin/sed -nf
+
+#Leerzeichen
+s/ \{2,\}/ /g
+s/^ \+//
+s/ \+$//
+
+#einzelne Zeichen an Anfang und Ende
+s/^. \+//
+s/ \+.$//
+s/^.$//
+
+#Ziffern in Worten
+s/0\([a-zA-Z]\)/O\1/g
+s/\([a-zA-Z]\)0/\1O/g
+
+s/1\([a-zA-Z]\)/I\1/g
+s/\([a-zA-Z]\)1/\1I/g
+
+s/2\([a-zA-Z]\)/Z\1/g
+s/\([a-zA-Z]\)2/\1Z/g
+
+s/5\([a-zA-Z]\)/S\1/g
+s/\([a-zA-Z]\)5/\1S/g
+
+s/8\([a-zA-Z]\)/B\1/g
+s/\([a-zA-Z]\)8/\1B/g
+
+#Großbuchstaben im Wort
+s/\([a-Z]\)B/\1ß/g
+s/\([A-Z]\)B\([a-z]\)/\1ß\2/g
+
+s/\([a-Z]\)C/\1c/g
+s/\([A-Z]\)C\([a-z]\)/\1c\2/g
+
+s/\([a-Z]\)I/\1i/g
+s/\([A-Z]\)I\([a-z]\)/\1i\2/g
+
+s/\([a-Z]\)J/\1j/g
+s/\([A-Z]\)J\([a-z]\)/\1j\2/g
+
+s/\([a-Z]\)K/\1k/g
+s/\([A-Z]\)K\([a-z]\)/\1k\2/g
+
+s/\([a-Z]\)O/\1o/g
+s/\([A-Z]\)O\([a-z]\)/\1o\2/g
+
+s/\([a-Z]\)P/\1p/g
+s/\([A-Z]\)P\([a-z]\)/\1p\2/g
+
+s/\([a-Z]\)S/\1s/g
+s/\([A-Z]\)S\([a-z]\)/\1s\2/g
+
+s/\([a-Z]\)U/\1u/g
+s/\([A-Z]\)U\([a-z]\)/\1u\2/g
+
+s/\([a-Z]\)V/\1v/g
+s/\([A-Z]\)V\([a-z]\)/\1v\2/g
+
+s/\([a-Z]\)W/\1w/g
+s/\([A-Z]\)W\([a-z]\)/\1w\2/g
+
+s/\([a-Z]\)X/\1x/g
+s/\([A-Z]\)X\([a-z]\)/\1x\2/g
+
+s/\([a-Z]\)Y/\1y/g
+s/\([A-Z]\)Y\([a-z]\)/\1y\2/g
+
+s/\([a-Z]\)Z/\1z/g
+s/\([A-Z]\)Z\([a-z]\)/\1z\2/g
+
+p
+
+#Warnungen
+h
+
+#einzelnes Zeichen
+/^. \| . \| .$/ {
+s/^.*$/#EINZELNES ZEICHEN/
+w /dev/stderr
+g
+}
+
+#komisches Zeichen
+/[^-a-zA-Z0-9.,;!?()’]/ {
+s/^.*\([^-a-zA-Z0-9.,;!?()’].*$/#KOMISCHES ZEICHEN: \1/
+w /dev/stderr
+g
+}
+
+#CamelCase
+/[a-z][A-Z]\|[A-Z][A-Z][a-z]/
+s/^.*\(.\{,5\}[a-z][A-Z]\|[A-Z][A-Z][a-z].\{,5\}.*$/#CamelCase: ...\1.../
+w /dev/stderr
+g
+}
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="html"><head>
+<meta charset="utf-8">
+<title>Tilt control</title>
+<meta name="viewport" content="width=device-width">
+<script src="tilt.js"></script>
+<style>
+body {
+	background: #eee;
+	width: 100%;
+	height: 100%;
+}
+</style>
+</head><body>
+<button id="start">Start</button>
+<script>
+start.onclick = function () {
+	tiltControl.init();
+	setInterval(function () {
+		start.textContent = '[x: ' + tiltControl.getPos().join(', y: ') + ']';
+	}, 100);
+};
+</script>
+</body>

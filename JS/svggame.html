@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Game</title>
+<!--
+Berge Oberkante: 30%-50%
+Berge Unterkante: 60%
+Objekte Höhe: 20%
+Objekte Unterkante: 65%-75%
+-->
+<style>
+@keyframes move {
+	from {
+		transform: translate(0);
+	}
+	to {
+		transform: translate(-100%);
+	}
+}
+
+@keyframes move-object {
+	from {
+		transform: translate(0);
+	}
+	to {
+		transform: translate(-600px);
+	}
+}
+
+@keyframes blue1 {
+	0% {
+		stop-color: #00f;
+	}
+	50% {
+		stop-color: #001;
+	}
+	100% {
+		stop-color: #00f;
+	}
+}
+
+@keyframes blue2 {
+	0% {
+		stop-color: #ddf;
+	}
+	50% {
+		stop-color: #66a;
+	}
+	100% {
+		stop-color: #ddf;
+	}
+}
+
+@keyframes green1 {
+	0% {
+		stop-color: #080;
+	}
+	50% {
+		stop-color: #010;
+	}
+	100% {
+		stop-color: #080;
+	}
+}
+
+@keyframes green2 {
+	0% {
+		stop-color: #0f0;
+	}
+	50% {
+		stop-color: #020;
+	}
+	100% {
+		stop-color: #0f0;
+	}
+}
+
+@keyframes brown1 {
+	0% {
+		stop-color: #fa0;
+	}
+	50% {
+		stop-color: #320;
+	}
+	100% {
+		stop-color: #fa0;
+	}
+}
+
+@keyframes brown2 {
+	0% {
+		stop-color: #a80;
+	}
+	50% {
+		stop-color: #210;
+	}
+	100% {
+		stop-color: #a80;
+	}
+}
+
+@keyframes star {
+	0% {
+		stop-color: #888;
+		stop-opacity: 0;
+	}
+	20% {
+		stop-opacity: 0;
+	}
+	50% {
+		stop-color: #fff;
+		stop-opacity: 1;
+	}
+	80% {
+		stop-opacity: 0;
+	}
+	100% {
+		stop-color: #888;
+		stop-opacity: 0;
+	}
+}
+
+.daynight {
+	animation: none 20s linear infinite;
+}
+
+.blue1 {
+	animation-name: blue1;
+}
+
+.blue2 {
+	animation-name: blue2;
+}
+
+.green1 {
+	animation-name: green1;
+}
+
+.green2 {
+	animation-name: green2;
+}
+
+.brown1 {
+	animation-name: brown1;
+}
+
+.brown2 {
+	animation-name: brown2;
+}
+
+#stars > * {
+	animation-duration: 20s;
+}
+
+.star {
+	animation-name: star;
+}
+
+.star-large .star {
+	r: 2px;
+}
+
+#trees > * {
+	animation-duration: 7s;
+}
+
+.move {
+	animation: move linear infinite;
+}
+
+.move-object {
+	animation: move-object linear;
+}
+
+.s-5 {
+	animation-duration: 5s;
+}
+
+.s-10 {
+	animation-duration: 10s;
+}
+
+.s-20 {
+	animation-duration: 20s;
+}
+</style>
+</head><body>
+<svg width="480" height="360">
+<defs>
+<linearGradient id="gradient-star">
+<stop offset="0%" class="star daynight"/>
+<stop offset="100%" class="star daynight"/>
+</linearGradient>
+<linearGradient id="gradient-path">
+<stop offset="0%" class="brown1 daynight"/>
+<stop offset="50%" class="brown2 daynight"/>
+<stop offset="100%" class="brown1 daynight"/>
+</linearGradient>
+<linearGradient id="gradient-sky" x2="0" y2="1">
+<stop offset="0%" class="blue1 daynight"/>
+<stop offset="100%" class="blue2 daynight"/>
+</linearGradient>
+<linearGradient id="gradient-hills" x2="0" y2="1">
+<stop offset="0%" class="green1 daynight"/>
+<stop offset="100%" class="green2 daynight"/>
+</linearGradient>
+</defs>
+<rect id="sky" fill="url(#gradient-sky)" x="0" y="0" width="480" height="360"/>
+<g id="stars"><circle cx="490" cy="30" r="1" fill="url(#gradient-star)"/></g>
+<g class="move s-10">
+<path id="hills" fill="url(#gradient-hills)" d="M0,180 c50,0 50,-40 100,-40 c50,0 150,60 180,60 c50,0 90,-40 120,-40 c20,0 50,20 80,20 V360 H0 z"/>
+<use xlink:href="#hills" x="480"/>
+</g>
+<g id="trees"><g>
+<rect fill="url(#gradient-path)" x="500" y="260" width="10" height="30"/>
+<circle fill="url(#gradient-hills)" cx="505" cy="240" r="30"/>
+</g></g>
+<g class="move s-5">
+<rect id="path" fill="url(#gradient-path)" x="0" y="300" width="480" height="40"/>
+<use xlink:href="#path" x="480"/>
+</g>
+</svg>
+<script>
+function addObject (layer, offset, cls) {
+	var g = document.createElementNS('http://www.w3.org/2000/svg', 'g'),
+		object = layer.childNodes[0].cloneNode(true);
+	object.setAttribute('style', 'transform: translateY(' + offset + 'px);');
+	g.appendChild(object);
+	g.setAttribute('class', 'move-object ' + (cls || ''));
+	layer.appendChild(g);
+	g.addEventListener('animationend', function () {
+		layer.removeChild(g);
+	});
+}
+setInterval(function () {
+	addObject(document.getElementById('stars'), Math.round(30 + 40 * Math.random()), Math.random() < 0.2 ? 'star-large' : '');
+	if (Math.random() < 0.2) {
+		addObject(document.getElementById('trees'), Math.round(2 - 4 * Math.random()), '');
+	}
+}, 1000);
+</script>
+</body></html>

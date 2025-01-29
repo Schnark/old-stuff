@@ -1,0 +1,17 @@
+#! /bin/sh
+# Aufruf: cat datei | statistik
+tempfile=`mktemp`
+sed 'y/	/ /
+s/"=/-/g
+s/\\g[rl]q\+//g
+s/\\dots//g
+s/^.*$/\L&/
+s/[^-a-z0-9 ]//g
+s/  \+/ /g
+s/^ //
+s/ $//
+s/ /\n/g' | sed -n '/[a-z]/ p' > $tempfile
+wc -l $tempfile | sed 's/\([0-9]*\).*/\1 Wörter gesamt/'
+sort $tempfile | uniq -c | sort -nr
+rm -f $tempfile
+

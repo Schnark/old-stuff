@@ -1,0 +1,25 @@
+var SOUND_DIE = 0,
+	SOUND_COIN = 1,
+	SOUND_HEAL = 2,
+	SOUND_BOUNCE = 3,
+	SOUND_DOOR = 4,
+	SOUND_WIN = 5,
+
+	TYPE_NONE = 0,
+	TYPE_ABYSS = 1,
+	TYPE_WALL = 2,
+	TYPE_WATER = 3,
+	TYPE_SAND = 4,
+	TYPE_EXIT = 5,
+	TYPE_GRASS = 6,
+	TYPE_N = 7,
+	TYPE_E = 8,
+	TYPE_S = 9,
+	TYPE_W = 10,
+	TYPE_DOOR = 11,
+
+	ITEM_NONE = 0,
+	ITEM_COIN = 1,
+	ITEM_HEAL = 2,
+
+	game, level, menu, tiltControl, playSound;

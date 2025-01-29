@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gs -sPAPERSIZE=a4 -sDEVICE=png256 -r300 -dFirstPage=$2 -dLastPage=$3 -dNOPAUSE -dBATCH -sOutputFile=seite%04d.png -q $1

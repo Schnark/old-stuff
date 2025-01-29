@@ -1,0 +1,45 @@
+#!/bin/sh
+ocr_1() {
+# ocr_1 option bild
+tmpfile=`mktemp`
+convert "$2" -adaptive-sharpen 2 -colors 8 -depth 4 -contrast -resample 300x300 $tmpfile.tif
+tesseract $tmpfile.tif "$2" -l $1 2> /dev/null
+rm $tmpfile
+rm $tmpfile.tif
+}
+
+ocr_2() {
+# ocr_2 option bild
+tmpfile=`mktemp`
+convert "$2" -extent 50%x100% -adaptive-sharpen 2 -colors 8 -depth 4 -contrast -resample 300x300 $tmpfile.tif
+tesseract $tmpfile.tif "$2".1 -l $1 2> /dev/null
+convert "$2" -extent 50%x100%+`identify -format "%[fx:w/2]" "$2"` -adaptive-sharpen 2 -colors 8 -depth 4 -contrast -resample 300x300 $tmpfile.tif
+tesseract $tmpfile.tif "$2".2 -l $1 2> /dev/null
+rm $tmpfile
+rm $tmpfile.tif
+}
+
+SPALTEN="1"
+case $1 in
+"en") OPT="eng"
+;;
+"de") OPT="deu"
+;;
+"frak") OPT="deu-f"
+;;
+*) echo "Verwendung: ocr Sprache [Spalten] Dateien"
+echo 'Sprache: en, de, frak'
+echo 'Spalten: 2 (Grenze muss genau in der Mitte liegen)'
+echo 'Dateien: ohne Leerzeichen, die Ausgabe erfolgt in Textdateien mit gleichem Namen und Endung .txt'
+exit;
+;;
+esac
+shift
+if [ "$1" == 2 ]; then
+   SPALTEN="2";
+   shift;
+fi
+for DATEI in $*
+do
+	ocr_$SPALTEN $OPT $DATEI
+done
