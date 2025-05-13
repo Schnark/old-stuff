@@ -533,6 +533,8 @@ Abandoned js scripts
 * 2016-01-10  commonjs.js
 * 2013-07-25  console.js
 * 2021-08-10  covid-certificate.js
+* 2025-02-12  ia-scrapper-v1.js
+* 2025-05-06  ia-scrapper-v2.js
 * 2018-03-26  info.html
 * 2019-02-17  instrument.js
 * 2022-02-21  keyboard-test.js
