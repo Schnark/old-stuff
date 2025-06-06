@@ -575,6 +575,25 @@ Abandoned app
 * 2017-12-07  index.html
 * 2015-09-30  ocrad.js
 
+### search
+Abandoned app
+
+* 2022-10-09  edit.html
+* 2022-05-30  icon.svg
+* 2022-10-09  index.html
+* 2022-05-13  LICENSE.txt
+* 2022-05-13  makefile
+* 2022-05-13  manifest.webapp
+
+#### res
+* 2022-10-10  data-manager.js
+* 2022-10-09  edit.js
+* 2022-05-13  icon128.png
+* 2022-05-13  icon512.png
+* 2022-10-10  l10n.js
+* 2022-10-09  search.js
+* 2022-06-05  style.css
+
 ### simple-webgl
 Abandoned libraries
 

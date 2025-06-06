@@ -1,0 +1,15 @@
+{
+	"version": "1.0",
+	"name": "Search",
+	"description": "App to manage search engines",
+	"launch_path": "/index.html",
+	"icons": {
+		"128": "/res/icon128.png",
+		"512": "/res/icon512.png"
+	},
+	"developer": {
+		"name": "Michael Müller",
+		"url": "https://github.com/Schnark"
+	},
+	"default_locale": "en"
+}

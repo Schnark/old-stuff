@@ -1,0 +1,59 @@
+html {
+	font-family: sans-serif;
+}
+
+button, input, select, textarea {
+	font: inherit;
+	margin-bottom: 0.5em;
+}
+
+input, select, textarea {
+	width: 100%;
+}
+
+input[type="checkbox"] {
+	width: auto;
+}
+
+textarea {
+	height: 10em;
+}
+
+button {
+	display: block;
+	width: 100%;
+	line-height: 2;
+	border: none;
+	border-radius: 2px;
+	text-align: center;
+	background-image: linear-gradient(-45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+	background-color: blue;
+	color: white;
+	text-decoration: none;
+}
+
+button.warning {
+	background-color: red;
+}
+
+p {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.link-container {
+	margin-top: -1em;
+	text-align: right;
+}
+
+a {
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	width: 1em;
+	padding: 0.3em;
+	margin-left: 0.5em;
+	border: solid thin;
+	border-radius: 0.5em;
+	text-align: center;
+}
