@@ -554,6 +554,22 @@ Abandoned app
 * 2016-11-06  app.js
 * 2015-12-21  index.html
 
+### downloader
+Abandoned (but working) program to download web pages for offline usage
+
+* 2020-04-25  download.html
+
+#### res
+* 2021-05-06  downloader.js
+* 2020-09-10  run-example.js
+* 2020-05-11  run.js
+* 2020-05-16  zip-builder.js
+* 2021-02-21  zip-downloader.js
+
+##### lib
+* 2019-07-22  pako.min.js
+* 2019-10-02  polyfill.js
+
 ### image
 Abandoned app
 
